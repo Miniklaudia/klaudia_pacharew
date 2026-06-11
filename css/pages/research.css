@@ -1,0 +1,16 @@
+body.research main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 4rem;
+}
+
+.section-title {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}

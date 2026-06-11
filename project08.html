@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 08</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* GREEN BACK TO TOP BUTTON WITH BLUE SHADOW */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      background: #00ff00;
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 255, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      opacity: 0.9;
+    }
+
+    #scrollTopBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px 10px rgba(0, 0, 255, 0.9);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="project project08">
+
+  <!-- REEL BACKGROUND -->
+  <div class="reel-container">
+    <img id="reel-image" src="" alt="reel image" style="display:none;">
+    <video id="reel-video" autoplay muted loop style="display:none;"></video>
+  </div>
+
+  <!-- ARROWS -->
+  <button class="arrow left">&#10094;</button>
+  <button class="arrow right">&#10095;</button>
+
+  <main>
+    <h1 class="glitch" data-text="project 08">
+      project 08: Light Feedback
+    </h1>
+
+    <h2>[ Enquiry ]</h2>
+    <p>
+      The intention was to build a complex visual experience out of simple and readily available aspects of the projection situation in response to my research on filmmaker, Malcolm Le Grice.
+    </p>
+
+    <h2>[ Medium and Software ]</h2>
+    <p>Projection, photography, performance.</p>
+
+    <!-- MINI REEL -->
+    <div class="project08-mini-reel">
+      <div class="mini-reel-container">
+        <img id="mini-reel-image" alt="project 08 detail">
+      </div>
+
+      <button class="mini-arrow left">&#10094;</button>
+      <button class="mini-arrow right">&#10095;</button>
+    </div>
+
+    <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+  </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="scrollTopBtn">↑</button>
+
+  <!-- JS -->
+  <script src="js/project08.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollBtn = document.getElementById("scrollTopBtn");
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+
+  <!-- ================================
+       R2 GALLERY + SWIPE SYSTEM
+  ================================== -->
+  <script>
+    const R2_BASE = "YOUR_R2_BASE_URL_HERE/";
+
+    const galleryItems = [
+      { type: "image", src: R2_BASE + "project08/project08-1.jpg" },
+      { type: "image", src: R2_BASE + "project08/project08-2.jpg" },
+      { type: "image", src: R2_BASE + "project08/project08-3.jpg" }
+    ];
+
+    let currentIndex = 0;
+
+    const img = document.getElementById("mini-reel-image");
+    const left = document.querySelector(".mini-arrow.left");
+    const right = document.querySelector(".mini-arrow.right");
+    const reel = document.querySelector(".project08-mini-reel");
+
+    function showImage(index) {
+      img.src = galleryItems[index].src;
+    }
+
+    function next() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      showImage(currentIndex);
+    }
+
+    function prev() {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      showImage(currentIndex);
+    }
+
+    // ARROWS
+    left.addEventListener("click", prev);
+    right.addEventListener("click", next);
+
+    // SWIPE SUPPORT (MOBILE)
+    let startX = 0;
+    let endX = 0;
+
+    reel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    reel.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) < 40) return;
+
+      if (diff > 0) {
+        next();
+      } else {
+        prev();
+      }
+    });
+
+    // INIT
+    showImage(currentIndex);
+  </script>
+
+</body>
+</html>

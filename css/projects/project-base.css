@@ -1,0 +1,8 @@
+body.project main,
+body.project h1,
+body.project h2,
+body.project p,
+body.project .archive-image {
+  position: relative;
+  z-index: 1;
+}

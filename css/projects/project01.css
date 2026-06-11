@@ -1,0 +1,154 @@
+/* =================================
+PROJECT 01 — VIDEO BACKGROUND
+================================= */
+
+body.project01 {
+  background: black;
+  overflow-x: hidden;   /* prevent sideways scroll */
+  overflow-y: auto;     /* allow vertical scroll */
+}
+
+/* =================================
+VIDEO BACKGROUND
+================================= */
+
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  z-index: 0;           /* behind overlay and content */
+  pointer-events: none;
+}
+
+/* =================================
+DARK OVERLAY
+================================= */
+
+body.project01::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+
+  z-index: 1;           /* above video, below content */
+  pointer-events: none;
+}
+
+/* =================================
+DISABLE OTHER GLITCH
+================================= */
+
+body.project01::after,
+body.project01 #glitchOverlay {
+  display: none !important;
+}
+
+/* =================================
+CONTENT (TOP LAYER)
+================================= */
+
+body.project01 main,
+body.project01 nav,
+body.project01 h1,
+body.project01 h2,
+body.project01 p,
+body.project01 .archive-image,
+body.project01 .system-status {
+  position: relative;
+  z-index: 3;           /* top layer, above overlay and video */
+}
+
+/* =================================
+TEXT HIGHLIGHT FOR READABILITY
+================================= */
+
+main h1,
+main h2,
+main p,
+nav a,
+.file,
+.archive-image {
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* =================================
+GLITCH TEXT EFFECT
+================================= */
+
+.glitch {
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.glitch::before {
+  color: #ff00ff;
+  z-index: -1;
+  animation: glitchTop 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  color: #00ffff;
+  z-index: -2;
+  animation: glitchBottom 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+  0% { clip-path: inset(0 0 80% 0); transform: translate(-2px,-2px); }
+  20% { clip-path: inset(10% 0 65% 0); transform: translate(2px,0); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-1px,1px); }
+  60% { clip-path: inset(60% 0 20% 0); transform: translate(1px,-1px); }
+  80% { clip-path: inset(85% 0 5% 0); transform: translate(-2px,2px); }
+  100% { clip-path: inset(0 0 80% 0); }
+}
+
+@keyframes glitchBottom {
+  0% { clip-path: inset(80% 0 0 0); transform: translate(2px,2px); }
+  20% { clip-path: inset(65% 0 10% 0); transform: translate(-1px,0); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(1px,-1px); }
+  60% { clip-path: inset(20% 0 60% 0); transform: translate(-2px,1px); }
+  80% { clip-path: inset(5% 0 85% 0); transform: translate(2px,-2px); }
+  100% { clip-path: inset(80% 0 0 0); }
+}
+
+/* =================================
+PROJECT 01 — AUDIO TOGGLE BUTTON NEXT TO TITLE
+================================= */
+
+body.project01 #play-sound {
+  display: inline-block;        /* sit next to title */
+  margin-left: 12px;            /* space from title */
+  vertical-align: middle;       /* align with text */
+  font-size: 1rem;
+  padding: 0.3em 0.6em;
+  background: rgba(0, 0, 0, 0.5); /* match title background */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+body.project01 .project-gallery .arrow:hover {
+  color: #ff00cc;
+}
+
+body.project01 #play-sound:hover {
+  background: rgba(255, 255, 255, 0.2); /* subtle hover effect */
+}
+

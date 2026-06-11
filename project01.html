@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 01</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    /* INLINE TITLE CONTAINER */
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #play-sound {
+      display: inline-block;
+      font-size: 0.9rem;
+      padding: 0.2em 0.5em;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      vertical-align: middle;
+      z-index: 5;
+    }
+
+    #play-sound:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body class="project project01">
+
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop playsinline id="bg-video">
+   <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/videos/(mis)communication.mp4" type="video/mp4">
+  </video>
+
+  <!-- DARK OVERLAY -->
+  <div id="video-overlay"></div>
+
+  <main>
+    <div class="title-container">
+      <h1 class="glitch" data-text="project 01">
+        project 01: (mis)communication: encounter with the glitch
+      </h1>
+      <button id="play-sound">🔊 Play Sound</button>
+    </div>
+
+    <h2>[ Enquiry ]</h2>
+    <p>
+      To explore the relationship between humans and technology, looking into how glitches can emerge as moments of awakening, offering glimpses of possibility and empowerment; applying glitch as a conceptual tool. 
+      I drew on my experiences as someone who is neurodivergent and the struggles entangled with this, whether it is reading, speaking, or simply communicating my ideas to others, often needed in a linear manner which is not the way I think. I describe this rhizomatic mess of entanglements that happens during communication, and this made me think about how I can imply this in my work through matter. The wires I was working with became a way of grasping the technology itself, navigating my experiences of this ‘glitch’ and poetically opening up this conversation with others. This led to my research on information theory within engineering as a way of understanding language and communication. I was able to compare the ways in which humans and machines encode and decode information within information processing to transfer data from one ‘brain’ to another.
+    </p>
+
+    <h2>[ Medium and Software ]</h2>
+    <p>Projections, performance, screens and analogue glitching through the manipulations of VGA cables.</p>
+
+   
+
+    <button id="scrollTopBtn">↑ Top</button>
+
+    <!-- PROJECT 01 GALLERY -->
+    <div class="project-gallery project01">
+      <button class="arrow left">&#8592;</button>
+      <div class="gallery-container">
+        <!-- Updated ID to match main.js initGallery -->
+        <img id="gallery-image-01" src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project01/project01-1.jpg" alt="Project 01 image 1">
+      </div>
+      <button class="arrow right">&#8594;</button>
+    </div>
+     <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

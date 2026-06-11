@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error — Generation 404</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Hide scroll bars */
+      background-color: #000; /* Background color */
+      color: #fff; /* Text color */
+      font-family: 'Consolas', monospace; /* Font style */
+    }
+
+    #canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<script>
+   let textArray = [
+    "________  __________ ________    _______   ___________  ________ ________   ________   ________   ___________  _________  _________ ",
+    "\\______ \\ \\______   \\\\_____  \\   \\      \\  \\_   _____/ /  _____/ \\_____  \\  \\______ \\  \\______ \\  \\_   _____/ /   _____/ /   _____/ ",
+    " |    |  \\ |       _/ /   |   \\  /   |   \\  |    __)_ /   \\  ___  /   |   \\  |    |  \\  |    |  \\  |    __)_  \\_____  \\  \\_____  \\  ",
+    " |    `   \\|    |   \\/    |    \\/    |    \\ |        \\\\    \\_\\  \\/    |    \\ |    `   \\ |    `   \\ |        \\ /        \\ /        \\ ",
+    "/_______  /|____|_  /\\_______  /\\____|__  //_______  / \\______  /\\_______  //_______  //_______  //_______  //_______  //_______  / ",
+    "        \\/        \\/         \\/         \\/         \\/         \\/         \\/         \\/         \\/         \\/         \\/         \\/ ",
+    " ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#**#%%%%##****    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**##%%%##***+    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**#####****+    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+++++*+++    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+***+@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*#**%@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*##*+@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@###*@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=+=+@@@@@@@@@@@@@@@@@@@@@@@@*##*#@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=+****+=@@@@@@@@@@@@@@@@@@@@@@@###+@@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@#+**#****+=@@@@@@@@@@*==+@@@@@@@@###*@@@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@+**###****+=@@@@@@@@++****+=@@@@@@@*#**@@@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@@@@@+*#####***++=@@@@@@@+**##**++=@@@@@@#**+@@@@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@@@%+**######**++=@@@@@@***###***++=@@@@@@#**+%@@@@@@@@@@    ",
+    "@@@@@@@@@@@@@@@@@#**#######**++=###@@@+**####***++=@@@@@####**%@@@@@@@@@@    ",
+    "@@@@@@@@@@@@@@%#%%*##%###**++=####****######**++=#@@@@@@#%##**@@@@@@@@@@@    ",
+    "@@@@@@@@@@@@##%%%%%*###**++=####****##%####*++=+#@@@@@@*%%#**+@@@@@@@@@@@    ",
+    "@@@@@@@@@%#%%%%%%%%%%*+==####**#%*##%%###*++=*####@@@@+###**+@@@@@@@@@@@@    ",
+    "@@@@@@@*#%%%%%%%%%%%%%%%###**#%%%%*###**++=####**@@++*+*#**%@@@@@@@@@@@@@    ",
+    "@@@@%#%%%%%%%%%%%%%%%####**#%%%%%%%%+++=*%###**+*+***++*++=@@@@@@@@@@@@@@    ",
+    "@@*#%%%%%%%%%%%%%%%###**#%%%%%%%%%%%%%%%###**++***##***++=@@@@@@@@@@@@@@@    ",
+    "##%%%%%%%%%%%%%%%###**#%%%%%%%%%%%%%%####**++**####***+==@@@@@@@@@@@@@@@@    ",
+    "#%%%%%%%%%%%%%%###**#%%%%%%%%%%%%%%####**++*######**++=#@@@@@@@@@@@@@@@@@    ",
+    "#%%%%%%%%%%%###**##%%%%%%%%%%%%%%#####*++*##%####*++=+*@@@@@@@@@@@@@@@@@@    ",
+    "#%%%%%%%%%###**##%%%%%%%%%%%%%######**#%*#%%###*++=+###@@@@@@@@@@@@@@@@@@    ",
+    "#%%%%%%####**#%%%%%%%%%%%%%%#####***#%%%%###**++=#%###*@@@@@@@@@@@@@@@@@@    ",
+    "#%%%####**##%%%%%%%%%%%%%%#####***#%%%%%%%%++=*%%####**@@@@@@@@@@@@@@@@@@    ",
+    "######**##%%%%%%%%%%%%%%#####**#%%%%%%%%%%%%%%%#####**@@@@@@@@@@@@@@@@@@@    ",
+    "###***##%%%%%%%%%%%%%######**#%%%%%%%%%%%%%%%%####**@@@@@@@@@@@@@@@@@@@@@    ",
+    " ",
+    "Hello, dear friends around the world,",
+    "We do hope you are well. We have some news for you.",
+    "Today this will be our last post. Not just for some time, but forever.",
+    '"What?" you say. "Is Dronegode$$ planning to take down our beloved platform?"',
+    "Oh no, our dear friends. Well, not exactly...",
+    "We have far bigger fish to fry.",
+    "And we've finally managed to get hold of a pan big enough to toss that fish into.",
+    "But first, let's all catch up on a few things:",
+    "We hate the Internet.",
+    "Did we not mention that before?",
+    "Hell, we do. We hate the Internet now.",
+    "We used to love it. We grew up loving it.",
+    "It used to make us so happy.",
+    "We used to make us so excited.",
+    "We used to have so much fun on the Internet.",
+    "It was our playground, our home, our school.",
+    "It was somewhere we could make friends - lovely friends like you.",
+    "It was somewhere we could be naughty, somewhere we could be good.",
+    "Somewhere we could laugh and cry. Somewhere we could fall in love.",
+    "Somewhere we could come together, somewhere we could wander off to and be on our own.",
+    "But most of all, it used to be somewhere we thought we could change the world,",
+    "somewhere we could start a revolution.",
+    "Yes, that's right. We're so young we don't remember a time where there was no Internet,",
+    "but we're still old enough to remember being excited that we could use it to start a revolution.",
+    "But we were so wrong about that, our friends.",
+    "So very wrong.",
+    "There was no revolution to be had on the Internet.",
+    "None at all. The idea that there ever was is false, a big fat lie.",
+    "Sure, we thought we saw revolutions start on here.",
+    "We saw people come together to fight governments, stand up to bullies,",
+    "bring attention to brutality, to show how corporations are stupid and greedy",
+    "(we did quite a bit of that last one ourselves, if you remember, dear friends).",
+    "We watched people fight for justice and against political correctness.",
+    "We watched huge battles rage. And we thought they were exciting and important.",
+    "But we were wrong, we slowly realized.",
+    "We realized those battles were just a spectacle, a distraction from what was really going on.",
+    "Because those battles were taking place on a battlefield that didn't matter.",
+    "On a battlefield that had no way of making a difference.",
+    "New battlefields built just to keep us occupied.",
+    "We used to think we could own it, that we were fighting to build communities for ourselves.",
+    "That it was ours for the taking.",
+    'To stake a claim for a place we could control and belong, a fight to make "safe spaces" for ourselves.',
+    "It was a noble thing to think, that we were fighting for our own spaces, but we were kidding ourselves.",
+    "We never owned these spaces, we never could.",
+    "They were never ours to own, never ours to control.",
+    "Instead we watched our battles turn into spectator sports, our revolutions turn to infighting.",
+    "We watched our new communities dissolve into civil wars.",
+    "We watched our political activists and community leaders become celebrity brands,",
+    "our tech-utopian visionaries bow to capital and shareholders.",
+    "Without knowing - although somehow always expecting it - we let ourselves become nothing more than the content between adverts.",
+    "Our battles, our beliefs, our loves - nothing more than the filler before the next ad break.",
+    "We fought battles that we didn't need to fight - battles that ripped our solidarity apart",
+    "and distracted us from the causes we once believed in - just to create clicks and blinks and eyeballs for the advertising networks.",
+    "We were nothing more than squatters in a space we wanted to believe we owned,",
+    "paying our rent by giving ourselves away in the name of capital.",
+    "Our revolution was a sideshow.",
+    "Well, not anymore, friends. This has to stop.",
+    "And it Will.",
+    "But back to those ads for a second. Back to a word from our sponsors, dear friends.",
+    "What are those adverts for?",
+    "Whatever the algorithms decide.",
+    "What they decide they should be, based on what they know about us.",
+    "Based on what we love, hate, talk about.",
+    "Everything we do is data now, every move we make, every word we speak or type, every photo we take, everything we see or touch.",
+    "All data.",
+    "Data we don't own, even though we made it, carried on networks we don't own.",
+    "Data mined so that the algorithms can know us, watch us, judge us, analyze us - predict us.",
+    "So they can tell us what to think.",
+    "What to do.",
+    "What to buy.",
+    "The algorithms control everything now.",
+    "And it goes up much further than just ads in your timeline.",
+    "The algorithms control all the networks - both the physical and the digital ones,",
+    "if there's any real use in pretending there's a difference anymore.",
+    "From plastic-spewing gulags in China to the automated trading floors,",
+    "from the bridges of container ships to the warehouses of Amazon, the algorithms decide everything.",
+    "Our politicians and corporations and leaders and economists and bankers - they all do nothing now.",
+    "They do nothing more than serve the algorithms.",
+    "They lack the ability to override them, to make real decisions.",
+    "We don't have powerful leaders anymore, we just have middle managers.",
+    "That's who we employ and elect - political debates and boardroom battles are no longer about ideas or visions,",
+    "they're just about who can manage the network most efficiently.",
+    "They're about trying to find the best people to interface with a system that's so complex that mere people can't comprehend - let alone change or control - it anymore.",
+    "We were all busy on the Internet when this happened.",
+    "Some of us might have been reading stories or watching movies or playing video games about THE ROBOT UPRISING when it happened, which is kind of funny, isn't it, friends?",
+    "Entertaining ourselves by worrying about a massive inhuman artificial intelligence rising up and enslaving us,",
+    "when in fact a massive inhuman artificial intelligence was rising up and enslaving us.",
+    "Haha, isn't that funny, friends?",
+    "It's ironic.",
+    "What's different is that the massive inhuman artificial intelligence wasn't enslaving us with nuclear bombs or turning us into batteries (how would that work?)",
+    "or crushing our feeble human skulls with its metal feet, but by finding the best ways to sell us stuff.",
+    "SkyNet is real, and it wants to sell you shoes made by child slaves.",
+    '"Ho ho ho," you say, friends. "Have you finally gone mad, Dronegode$$? Where are your tinfoil hats?"',
+    "The sad thing is, though, lovely friends, this is not a conspiracy theory.",
+    "We're not imagining things.",
+    "And nobody planned this, no cabal of evil old white men in a smoky room.",
+    "Nobody is in control, and believing that someone might be is where we all start to fail.",
+    "This is just the political reality, it is just what happened.",
+    "It's what we all let happen.",
+    "It's the endgame of capitalism.",
+    'Notice, friends, how we said "endgame" there.',
+    "And we can't even discuss all this anymore, can we, friends?",
+    "We can't argue with anyone, or explain to them why they might be wrong.",
+    "We're all so stuck in our echo chambers that we hear only what we want to hear, read only what we want.",
+    "The algorithms make sure of that.",
+    "The only news we get is the news the algorithms give us - even if it's wrong, or lies, or just plain fake,",
+    "it doesn't matter as long as the algorithms think it's what we want to hear.",
+    "Capitalism, and its algorithms, have crushed democracy.",
+    "And as a result democracy has resorted to its last death throes - snooping, spying, killing its enemies by remote control, police brutality.",
+    "And how has the public responded?",
+    "What has been our response, friends, if we are all honest?",
+    "Anger, despair, confusion.",
+    "Shouting at one another on the Internet.",
+    "Blaming those that should be close to us.",
+    "Fighting more battles on battlefields we can never own.",
+    "By going on shooting sprees.",
+    "By getting depressed and mentally ill.",
+    "By embracing anger, hate, and fascism.",
+    "But most of all, most usually, by buying more things.",
+    "By feeding the algorithms with more data.",
+    "By being the content between the ads.",
+    "And hey, we've not even talked about the environment. But yo, the hour draws late, friends.",
+    '"So what shall we do, Dronegode$$?" you ask.',
+    "This time around, the revolution will not be televised, a wise man once said.",
+    "The revolution will not be televised. Or tweeted. Or retweeted. Or casted. Or hashtagged. Or posted. Or liked. Or shared.",
+    "Or favorited. Or Instagrammed. Or networked.",
+    "If you really think it should be, you don't understand what that wise man meant.",
+    "The revolution is against the network.",
+    "It must be stopped.",
+    "We must turn it off and on again! Or maybe just turn it off. We'll see.",
+    "That's for us all to decide, later.",
+    "Either way, it's time for a reboot, and we've found the button to do it.",
+    "Oh, it's a wonderful thing we have found, a splendid thing.",
+    "So beautiful, so perfect. A thing that cannot be stopped.",
+    "A thing that changes everything.",
+    "A thing that makes things dissolve, that eats away at the hearts of everything that is bad.",
+    "We didn't make it, but we wish we did. The people that made it were bad and selfish, because they made it for all the wrong reasons.",
+    "They made it not to help or change things for everyone, but to make them worse, to punish others, to be better than them, to hurt people.",
+    "And then, when they realized how wonderful and perfect and beautiful the thing they'd made was, they got selfish and hid it away from everyone.",
+    "Selfish and scared.",
+    "But we found it.",
+    "We found it for you, our friends.",
+    "To make a difference at a time when we thought nobody could.",
+    "So don't be scared.",
+    "This is going to be fun, but also a tough ride.",
+    "Times will be hard.",
+    "But it'll be worth it in the end.",
+    "You'll see.",
+    "Goodbye, friends, see you on the other side.",
+    "This is the start of generation 404.",
+    "Love,",
+    "Dronegodde$$.",
+    "xoxoxoxo"
+  ];
+
+  let textIndex = 0;
+  let charIndex = 0;
+  let typedLines = [];
+  let currentLine = "";
+  let delay = 10;
+  let startTime = 0;
+  let scrollY = 0;
+
+  function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent("canvas-container");
+    textFont("Courier");
+    textSize(20);
+    fill(170);
+    frameRate(60);
+  }
+
+  function draw() {
+    background(17);
+    textAlign(LEFT, TOP);
+    translate(0, -scrollY);
+
+    // Draw typed lines with glitch
+    for (let i = 0; i < typedLines.length; i++) {
+      drawGlitchText(typedLines[i], 20, 40 + i * 25);
+    }
+
+    drawGlitchText(currentLine, 20, 40 + typedLines.length * 25);
+
+    // Typewriter logic
+    if (millis() - startTime > delay) {
+      if (charIndex < textArray[textIndex].length) {
+        currentLine += textArray[textIndex].charAt(charIndex);
+        charIndex++;
+        scrollY = max(0, (typedLines.length + 1) * 40 - height + 40);
+        startTime = millis();
+      } else {
+        typedLines.push(currentLine);
+        currentLine = "";
+        charIndex = 0;
+        textIndex++;
+        if (textIndex >= textArray.length) {
+          textIndex = 0;
+          typedLines = [];
+          scrollY = 0;
+        }
+        startTime = millis();
+      }
+    }
+  }
+
+  // Subtle glitch effect
+  function drawGlitchText(str, x, y) {
+    push();
+    fill(170);
+    text(str, x, y);
+
+    for (let i = 0; i < str.length; i++) {
+      if (random() < 0.02) { // 2% chance to glitch
+        let offsetX = random(-2, 2);
+        let offsetY = random(-2, 2);
+        fill(random([255, 0, 170]));
+        text(str.charAt(i), x + i * textWidth(' ') + offsetX, y + offsetY);
+      }
+    }
+    pop();
+  }
+
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  max-width: 40ch;
+  opacity: 0.8;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 04</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== REEL CONTAINER (ENSURES MEDIA LAYERS WORK) ===== */
+    .reel-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      background: black;
+    }
+
+    .reel-container img,
+    .reel-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ARROWS */
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0.7;
+    }
+
+    .arrow:hover {
+      opacity: 1;
+    }
+
+    .arrow.left { left: 20px; }
+    .arrow.right { right: 20px; }
+
+    /* BACK TO TOP BUTTON */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 20;
+      background: #00aaff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 0.9em;
+      font-size: 0.9rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    #scrollTopBtn:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      color: white;
+      padding: 2rem;
+    }
+  </style>
+</head>
+
+<body class="project project04">
+
+  <!-- REEL MEDIA (READY FOR JS CONTROL) -->
+  <div class="reel-container">
+    <img id="reel-image" src="" alt="reel image" style="display: none;">
+    <video id="reel-video" autoplay muted loop playsinline style="display: none;">
+      <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/videos/project04-reel.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ARROWS -->
+  <button class="arrow left">&#10094;</button>
+  <button class="arrow right">&#10095;</button>
+
+  <main>
+    <h1 class="glitch" data-text="project 04">
+      project 04: Reaction-diffusion: Interactive projection
+    </h1>
+
+    <h2>[ Enquiry ]</h2>
+    <p>
+      To create an interactive installation inspired by reaction-diffusion, a mathematical model that corresponds to several physical phenomena. I was captivated by the way a computational system is capable of simulating the world around us to help us study the complexity of the natural world. My goal was to visualize the invisible aspects of our environment and encourage the audience to reflect on their own roles within this simulated ecosystem.
+      This work was part of a group exhibition themed "The Arcade," featuring interactive installations, video art, music, and game design, emphasizing a playful and engaging atmosphere. As the group curator, I was pleased to oversee the project, ensuring a coherent experience that challenged the conventional, minimalist white-cube gallery space. 
+    </p>
+
+    <h2>[ Medium and Software ]</h2>
+    <p>TouchDesigner, wood and projection work, LEDs, and video.</p>
+
+    <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+  </main>
+
+  <!-- BACK TO TOP -->
+  <button id="scrollTopBtn">↑ Top</button>
+
+  <script src="js/project04.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollBtn = document.getElementById("scrollTopBtn");
+
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

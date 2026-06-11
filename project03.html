@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 03</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    /* TITLE CONTAINER */
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* SOUND BUTTON */
+    #play-sound {
+      display: inline-block;
+      font-size: 0.9rem;
+      padding: 0.2em 0.5em;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      vertical-align: middle;
+      z-index: 5;
+    }
+
+    #play-sound:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* BACK TO TOP BUTTON */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      background: #ff00ff; /* pink */
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6em 1em;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,0,255,0.5);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      opacity: 0.8;
+    }
+
+    #scrollTopBtn:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="project project03">
+
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/videos/Weather.mp4" type="video/mp4">
+  </video>
+
+  <main>
+    <div class="title-container">
+      <h1 class="glitch" data-text="project 03">
+        project 03: We are the Weather: Weather API data visualisation
+      </h1>
+      <button id="play-sound">🔊 Play Sound</button>
+    </div>
+
+    <h2>[ Enquiry ]</h2>
+    <p>
+      To create a Weather API data visualisation of my family members' locations. Using Python and Touchdesigner, I extracted specific weather data to develop generative visuals representing the live conditions of those particular cities, intending to display the information as a multiple-screen installation or series of projections showing the various perspectives in one place. The visuals include live camera streams from the cities, distorted through chosen weather conditions. 
+      My work aims to act as a 'cut' where, since I cannot see and feel how my family is, I am opening a window through screens, which in some way becomes informative. Today, it is interesting how we experience weather through technology while we rely on weather apps to tell us what it is like outside instead of opening the window to see for ourselves.
+    </p>
+
+    <h2>[ Medium and Software ]</h2>
+    <p>Python, TouchDesigner, Blender and projection work.</p>
+
+    <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+  </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="scrollTopBtn">↑ Top</button>
+
+  <script src="js/main.js"></script>
+  <script>
+   
+    
+
+      // ===== SCROLL TO TOP BUTTON =====
+      const scrollBtn = document.getElementById("scrollTopBtn");
+
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Optional: show button only when scrolled down
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
+        }
+      });
+
+      // hide initially
+      scrollBtn.style.display = "none";
+    
+  </script>
+</body>
+</html>

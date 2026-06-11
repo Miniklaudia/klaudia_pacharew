@@ -1,0 +1,22 @@
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.glitch::before {
+  color: var(--accent);
+  transform: translate(-2px, 0);
+}
+
+.glitch::after {
+  color: #ff06ea;
+  transform: translate(2px, 0);
+}

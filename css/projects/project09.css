@@ -1,0 +1,68 @@
+body.error-page {
+  background: black;
+}
+
+/* subtle flicker */
+body.error-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.05) 0 2px,
+    transparent 2px 4px
+  );
+  animation: errorFlicker 0.3s infinite;
+  z-index: 0;
+}
+
+@keyframes errorFlicker {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.25; }
+  100% { opacity: 0.1; }
+}
+
+/* ============================
+ERROR PAGE GLITCH
+============================ */
+
+body.error-page {
+  background: black;
+  overflow: hidden;
+}
+
+/* flicker overlay */
+body.error-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.04) 0 2px,
+    transparent 2px 4px
+  );
+  animation: flicker404 0.25s infinite;
+  z-index: 0;
+}
+
+@keyframes flicker404 {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.25; }
+  100% { opacity: 0.1; }
+}
+
+/* subtle shake */
+.corrupt {
+  position: relative;
+  animation: jitter 2s infinite;
+}
+
+@keyframes jitter {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(1px,-1px); }
+  50% { transform: translate(-1px,1px); }
+  75% { transform: translate(1px,1px); }
+  100% { transform: translate(0,0); }
+}

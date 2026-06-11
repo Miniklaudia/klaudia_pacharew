@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 05</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* TITLE + BUTTON */
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #play-sound {
+      display: inline-block;
+      margin-left: 12px;
+      font-size: 1rem;
+      padding: 0.3em 0.6em;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #play-sound:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* BACKGROUND VIDEO */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -10;
+      pointer-events: none;
+    }
+
+    /* SCROLL BUTTON */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #00aaff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 0.9em;
+      cursor: pointer;
+    }
+
+    /* GALLERY */
+    .project-gallery {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-container img {
+      max-width: 90%;
+      max-height: 600px;
+      object-fit: contain;
+    }
+
+    .arrow {
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .arrow:hover {
+      color: #ff00cc;
+    }
+
+    /* FLOATING DUCKS */
+    .floating-duck {
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body class="project project05">
+
+  <!-- BACKGROUND VIDEO (R2 FIXED) -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/videos/Zombie.mp4" type="video/mp4">
+  </video>
+
+  <main>
+
+    <div class="title-container">
+      <h1 class="glitch" data-text="project 05">
+        project 05: The symphony of zombie media: A collaboration
+      </h1>
+      <button id="play-sound">🔊 Play Sound</button>
+    </div>
+
+    <h2>[ Enquiry ]</h2>
+    <p>
+      When all attempts to give new life have failed, how else can we connect with dead media? 
+      The Symphony of Zombie Media is a collaborative audio-visual installation that explores circuit bending as a form of resistance to planned obsolescence...
+    </p>
+
+    <h2>[ Medium and Software ]</h2>
+    <p>Found obsolete media, video editing and TouchDesigner.</p>
+
+    <!-- GALLERY -->
+    <div class="project-gallery project05">
+      <button class="arrow left">&#8592;</button>
+
+      <div class="gallery-container">
+        <img id="gallery-image-05"
+          src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project05/project05-1.jpg">
+      </div>
+
+      <button class="arrow right">&#8594;</button>
+    </div>
+
+    <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+
+  </main>
+
+  <button id="scrollTopBtn">↑ Top</button>
+
+  <script src="js/main.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const duckCount = 6;
+  const duckContainer = document.body;
+
+  for (let i = 0; i < duckCount; i++) {
+    const duck = document.createElement("img");
+
+    // R2 FIXED IMAGE PATH
+    duck.src = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project05/duck.png";
+
+    duck.classList.add("floating-duck");
+
+    duck.style.position = "fixed";
+    duck.style.width = `${120 + Math.random() * 60}px`;
+
+    duck.style.left = `${Math.random() * (window.innerWidth - 180)}px`;
+    duck.style.top = `${Math.random() * (window.innerHeight - 180)}px`;
+
+    duck.style.zIndex = 1000 + i;
+    duck.style.cursor = "grab";
+
+    duckContainer.appendChild(duck);
+
+    let dx = (Math.random() - 0.5) * 0.5;
+    let dy = (Math.random() - 0.5) * 0.5;
+
+    function animate() {
+      const rect = duck.getBoundingClientRect();
+      let x = rect.left + dx;
+      let y = rect.top + dy;
+
+      if (x < 0 || x + rect.width > window.innerWidth) dx = -dx;
+      if (y < 0 || y + rect.height > window.innerHeight) dy = -dy;
+
+      duck.style.left = `${x}px`;
+      duck.style.top = `${y}px`;
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    let offsetX, offsetY, isDragging = false;
+
+    duck.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - duck.offsetLeft;
+      offsetY = e.clientY - duck.offsetTop;
+      duck.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      duck.style.left = `${e.clientX - offsetX}px`;
+      duck.style.top = `${e.clientY - offsetY}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      duck.style.cursor = "grab";
+    });
+  }
+});
+  </script>
+
+</body>
+</html>

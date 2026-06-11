@@ -1,0 +1,18 @@
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 2rem 2rem 3rem;
+}
+
+main,
+h1,
+p,
+nav,
+.archive-image,
+.file {
+  position: relative;
+  z-index: 1;
+}

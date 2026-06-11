@@ -1,0 +1,17 @@
+#play-sound {
+  display: inline-block;
+  margin-left: 12px;
+  vertical-align: middle;
+  font-size: 1rem;
+  padding: 0.3em 0.6em;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#play-sound:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

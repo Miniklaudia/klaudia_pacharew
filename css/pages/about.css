@@ -1,0 +1,219 @@
+/* ============================
+ABOUT PAGE
+============================ */
+
+body.about-page {
+  background: black;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ============================
+LAYOUT
+============================ */
+
+main {
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* ============================
+ABOUT GRID
+============================ */
+
+/* 
+Desktop = 4 columns
+Medium screens = 2 columns
+Mobile = 1 column
+*/
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+/* ============================
+CONTENT BLOCKS
+============================ */
+
+.about-block {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 1rem;
+}
+
+/* contact section */
+
+.about-block.contact {
+  margin-top: 3rem;
+}
+
+/* ============================
+HEADINGS
+============================ */
+
+.about-block h2 {
+  font-weight: 500;
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-bottom: 0.8rem;
+}
+
+/* ============================
+PARAGRAPHS
+============================ */
+
+.about-block p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-size: clamp(0.95rem, 1vw, 1.05rem);
+}
+
+/* links */
+
+.about-block a {
+  color: white;
+  text-decoration: underline;
+}
+
+.about-block a:hover {
+  opacity: 0.7;
+}
+
+/* ============================
+NAVIGATION
+============================ */
+
+nav {
+  margin-top: 4rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  opacity: 0.7;
+  color: white;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* ============================
+LAYERING
+============================ */
+
+main,
+.about-block,
+nav,
+h1,
+h2,
+p {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================
+LARGE TABLETS / SMALL LAPTOPS
+============================ */
+
+@media (max-width: 1200px) {
+
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================
+TABLET
+============================ */
+
+@media (max-width: 800px) {
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  .about-block {
+    margin-top: 0.5rem;
+  }
+}
+
+/* ============================
+MOBILE
+============================ */
+
+@media (max-width: 480px) {
+
+  main {
+    padding: 1rem;
+  }
+
+  .about-block p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  #scrollTopBtn {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================
+CONTACT LINKS
+============================ */
+
+.about-block.contact a {
+  color: #ff66cc;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  position: relative;
+  font-weight: 500;
+}
+
+/* hover */
+
+.about-block.contact a:hover {
+  color: #00ffff;
+  text-shadow:
+    0 0 5px #00ffff,
+    0 0 12px #00ffff;
+}
+
+/* click / tap */
+
+.about-block.contact a:active {
+  color: #ffff00;
+  text-shadow:
+    0 0 6px #ffff00,
+    0 0 14px #ffff00;
+  transform: scale(0.97);
+}
+
+/* keyboard accessibility */
+
+.about-block.contact a:focus {
+  outline: 2px solid #ff00ff;
+  outline-offset: 4px;
+}

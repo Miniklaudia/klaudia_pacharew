@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>project 02</title>
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/base/variables.css">
+<link rel="stylesheet" href="css/base/typography.css">
+<link rel="stylesheet" href="css/base/layout.css">
+<link rel="stylesheet" href="css/projects/project-base.css">
+<link rel="stylesheet" href="css/projects/project02.css">
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===== BACKGROUND VIDEO FIX ===== */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  object-fit: cover;
+
+  z-index: -999;
+
+  pointer-events: none;
+}
+
+body {
+  background: black;
+}
+/* INLINE TITLE CONTAINER */
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+#play-sound {
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.2em 0.5em;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#play-sound:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Enquiry section */
+.enquiry-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.enquiry-container p {
+  flex: 1 1 450px;
+  margin: 0;
+}
+
+/* Video styling */
+.enquiry-video {
+  flex: 1 1 1000px;
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: 3px solid #0000;
+}
+
+/* Gallery */
+.project-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.gallery-container img {
+  max-width: 90%;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.arrow {
+  font-size: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.arrow:hover {
+  color: #ff00cc;
+}
+
+/* Back to top */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body class="project project02">
+
+<!-- BACKGROUND VIDEO -->
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/videos/Horizontal-Video-Final.mp4" type="video/mp4">
+</video>
+
+<div id="ghost-errors"></div>
+<div id="error-layer"></div>
+
+<main>
+
+  <div class="title-container">
+    <h1 class="glitch" data-text="project 02">
+      project 02: The Dawn of Generation 404
+    </h1>
+  </div>
+
+  <h2>[ Enquiry ]</h2>
+
+  <div class="enquiry-container">
+    <p>
+      The Dawn of Generation 404 (2024) is a video installation exploring postinternet culture and speculative futures.
+    </p>
+
+    <!-- PROJECT VIDEO -->
+    <video id="project-video" class="enquiry-video" loop playsinline>
+      <source src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project02/project02-video.mp4" type="video/mp4">
+    </video>
+
+    <button id="play-sound">🔊 Play Video</button>
+  </div>
+
+  <h2>[ Medium and Software ]</h2>
+  <p>Blender, creative coding, creative writing and multimedia.</p>
+
+  <!-- GALLERY -->
+  <div class="project-gallery">
+    <button class="arrow left">&#8592;</button>
+
+    <div class="gallery-container">
+      <img id="gallery-image"
+        src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project02/project02-1.jpg">
+    </div>
+
+    <button class="arrow right">&#8594;</button>
+  </div>
+
+  <nav>
+    <a href="archive.html">return to archive</a>
+  </nav>
+
+</main>
+
+<button id="scrollTopBtn">↑ Top</button>
+
+<script src="js/main.js"></script>
+<script src="js/project02-errors.js"></script>
+
+<script>
+// VIDEO BUTTON
+const projectVideo = document.getElementById("project-video");
+const audioBtn = document.getElementById("play-sound");
+
+audioBtn.addEventListener("click", async () => {
+  try {
+    if (projectVideo.paused) {
+      projectVideo.muted = false;
+      await projectVideo.play();
+      audioBtn.innerText = "🔇 Stop Video";
+    } else {
+      projectVideo.pause();
+      audioBtn.innerText = "🔊 Play Video";
+    }
+  } catch (err) {}
+});
+
+// GALLERY
+const galleryFiles = Array.from(
+  {length: 21},
+  (_, i) => `https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project02/project02-${i+1}.jpg`
+);
+
+let index = 0;
+const img = document.getElementById("gallery-image");
+
+function update(i) {
+  img.src = galleryFiles[i];
+}
+
+document.querySelector(".arrow.left").onclick = () => {
+  index = (index - 1 + galleryFiles.length) % galleryFiles.length;
+  update(index);
+};
+
+document.querySelector(".arrow.right").onclick = () => {
+  index = (index + 1) % galleryFiles.length;
+  update(index);
+};
+
+// SCROLL TOP
+document.getElementById("scrollTopBtn").onclick = () =>
+  window.scrollTo({ top: 0, behavior: "smooth" });
+</script>
+
+</body>
+</html>

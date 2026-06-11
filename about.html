@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>about</title>
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/base/variables.css">
+<link rel="stylesheet" href="css/base/typography.css">
+<link rel="stylesheet" href="css/base/layout.css">
+<link rel="stylesheet" href="css/pages/about.css">
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    background: linear-gradient(45deg, #ff00ff, #ff69b4);
+    color: #fff;
+    border: none;
+    border-radius: 30px; /* oval instead of circle to fit text */
+    width: auto;
+    padding: 12px 18px; /* gives room for text */
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255,0,255,0.7), 0 0 30px rgba(255,105,180,0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap; /* prevent wrapping */
+  }
+
+  #scrollTopBtn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 30px rgba(255,0,255,1), 0 0 40px rgba(255,105,180,0.8);
+  }
+</style>
+
+</head>
+
+<body class="about-page">
+
+<main>
+
+<h1 class="glitch" data-text="about">about</h1>
+
+<!-- 4 COLUMN GRID -->
+<div class="about-grid">
+
+  <!-- PROFILE -->
+  <section class="about-block">
+    <h2>[ profile ]</h2>
+    <p>
+      I am a London-based artist, researcher, educator and creative technologist currently teaching 
+      games design and architecture at Barnet Southgate College.
+    </p>
+    <p>
+      In my practice, I explore the intersections between art, science, technology and human experience.
+      My interests particularly focus on critical digital media studies and cyberfeminism.   
+      My research mainly explores glitch, network culture, authorship, and the strange emotional
+      space created by contemporary digital systems.
+    </p>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="about-block">
+    <h2>[ research ]</h2>
+    <p>
+      My current enquiry is <em>Glitch as Method:</em> — Women-centered speculative design for 
+      rethinking identity and difference in cyber environments.
+    </p>
+    <p>
+      Questioning how glitch and technological failure can be employed as speculative design 
+      methods to reimagine representations of gender, otherness, and neurodiversity 
+      within digital and cyber spaces.
+    </p>
+    <p>
+      I am currently developing a practice-based research project exploring this.
+    </p>
+  </section>
+
+  <!-- QUALIFICATIONS -->
+  <section class="about-block">
+    <h2>[ qualifications ]</h2>
+    <p><strong>2025</strong> — Level 3 Qualification in Teaching and Learning, City and Guilds</p>
+    <p><strong>2023–2024</strong> — MA (Hons) Interaction Design, UAL – London College of Communication  
+    First Class (Hons)</p>
+    <p>
+      <i>
+      During my Master’s degree I refined my technical expertise in creative coding while engaging with
+      critical technology studies, philosophy, decolonial design and media art theory.
+</i>
+    </p>
+    <p><strong>2019–2023</strong> — BA (Hons) Fine Art with Creative Computing, UAL – Central Saint Martins  
+    First Class (Hons)</p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="about-block">
+    <h2>[ work experience ]</h2>
+    <p><strong>2025 - Current</strong> - Lecturer in Level 3 Architecture & Level 2 Games Design| Barnet Southgate College, London.</p>
+    <p>
+  <i>
+    Delivering lectures and workshops focused on improving observational drawing skills and creative thinking.
+    Introducing students to game development tools.
+  </i>
+</p>
+    <p><strong>Free-lance</strong> — Digital Support Technician for BA and MA Computational Arts, UAL Camberwell</p>
+    <p><strong>Free-lance</strong> — Associate Lecturer, UAL (CSM, Camberwell & LCC)</p>
+    <p><strong>2025</strong> — VH Lecturer in Games Design | Buckinghamshire College Group, Aylesbury.</p>
+  </section>
+
+</div>
+
+<!-- CONTACT BELOW -->
+<section class="about-block contact">
+  <h2>[ contact ]</h2>
+  <p>
+  email: 
+  <a href="mailto:kpacharew.art@gmail.com?subject=Hello&body=Hi%20Klaudia,">
+    kpacharew.art@gmail.com
+  </a>
+  </p>
+
+  <p>
+    instagram: 
+    <a href="https://www.instagram.com/kpacharew.art" target="_blank" rel="noopener noreferrer">
+      @kpacharew.art
+    </a>
+  </p>
+</section>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">home</a>
+  <a href="archive.html">archive</a>
+</nav>
+
+</main>
+
+
+
+<!-- FUNKY BACK TO TOP BUTTON -->
+<button id="scrollTopBtn">↑ ZOOM UP!</button>
+
+<script src="js/about-type.js"></script>
+<script>
+  // BACK TO TOP BUTTON FUNCTION
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollBtn = document.getElementById("scrollTopBtn");
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>

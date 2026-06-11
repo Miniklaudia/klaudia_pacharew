@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Archive</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+</head>
+
+<body class="archive">
+
+  <div class="archive-bg"></div>
+  <div class="puter-glitch-layer"></div>
+
+  <main>
+    <button id="scrollTopBtn">↑ top</button>
+
+    <h1 class="glitch" data-text="Archive">Archive</h1>
+
+    <p>
+      a partial record.<br>
+      some files are missing.
+    </p>
+
+    <ul class="archive">
+      <li class="entry">
+        <a href="project01.html" class="file">> project_01.exe — (mis)communication: encounter with the glitch</a>
+      </li>
+      <li class="entry">
+        <a href="project02.html" class="file">> project_02.sys — The Dawn of Generation 404</a>
+      </li>
+      <li class="entry">
+        <a href="project03.html" class="file">> project_03.log — We are the Weather</a>
+      </li>
+      <li class="entry">
+        <a href="project04.html" class="file">> project_04.bin — Reaction-diffusion</a>
+      </li>
+      <li class="entry">
+        <a href="project05.html" class="file">> project_05.dat — The symphony of zombie media</a>
+      </li>
+      <li class="entry">
+        <a href="project06.html" class="file">> project_06.cfg — Let there be a sun...</a>
+      </li>
+      <li class="entry">
+        <a href="project07.html" class="file">> project_07.ai — Algorithm: Sea of unknown data</a>
+      </li>
+      <li class="entry">
+        <a href="project08.html" class="file">> project_08.lux — Light Feedback</a>
+      </li>
+      <li class="entry">
+        <a href="404.html" class="file">> project_09.tmp — IN PROGRESS</a>
+      </li>
+    </ul>
+
+    <nav>
+      <a href="index.html">← return</a>
+    </nav>
+
+  </main>
+
+  <!-- =========================
+       GLITCH SYSTEM (UPGRADED)
+  ========================== -->
+  <script>
+    const projectLinks = document.querySelectorAll('.archive .file');
+
+    projectLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+
+        const chance = Math.random();
+
+        // 20% → image-based error page
+        if (chance < 0.2) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = 'error-image.html';
+          }, 150);
+          return;
+        }
+
+        // 10% → classic error page
+        if (chance < 0.3) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = 'error.html';
+          }, 150);
+          return;
+        }
+
+        // 70% → normal navigation
+      });
+    });
+  </script>
+
+  <div class="system-status">
+    system status: unstable ▓▒░
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>project 06</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* BACK TO TOP BUTTON */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 20;
+      background: #ff6600;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em 0.9em;
+      font-size: 0.9rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    #scrollTopBtn:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    /* LAYER FIX */
+    main {
+      position: relative;
+      z-index: 2;
+    }
+
+    #circle-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* GALLERY FIX */
+    .gallery-container img,
+    .gallery-container video {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+
+<body class="project project06">
+
+  <!-- FLOATING CIRCLE FIELD -->
+  <div id="circle-layer"></div>
+
+  <main>
+
+    <h1 class="glitch" data-text="project 06">
+      project 06: Let there be a sun...
+    </h1>
+    
+    <h2>[ Enquiry ]</h2>
+    <p>
+      My research became a backbone and a driving force for creation; through continuous curiosity and questioning of what the sublime might be, I found artists and texts that directly inspired my work and vice versa. For example, through addressing the sublime framework as a mode of perception and questioning whether the sublime is an experience of truth or a blend of truth with something that is only perceptually true. Here, I encountered the book Techniques of the Observer by Jonathan Crary (1992), which was particularly influential in shaping the visual logic of this project.
+    </p>
+    
+    <h2>[ Medium and Software ]</h2>
+    <p>TouchDesigner, fabric and wood and creative writing.</p>
+
+    <!-- PROJECT 06 GALLERY -->
+    <section class="project-gallery">
+      <button class="arrow left">&#10094;</button>
+
+      <div class="gallery-container glitch-image">
+        <img 
+          id="gallery-image" 
+          src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-1.jpg" 
+          alt="project 06 image"
+        />
+
+        <video 
+          id="gallery-video" 
+          src="" 
+          controls 
+          style="display:none;"
+        ></video>
+      </div>
+
+      <button class="arrow right">&#10095;</button>
+    </section>
+
+    <nav>
+      <a href="archive.html">return to archive</a>
+    </nav>
+
+  </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="scrollTopBtn">↑ Top</button>
+
+  <script src="js/project06.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollBtn = document.getElementById("scrollTopBtn");
+
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

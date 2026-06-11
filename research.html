@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>research</title>
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/pages/research.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body.research {
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+main { padding: 3rem; }
+
+h1.glitch {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* folders */
+.folder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.folder {
+  width: 170px;
+  height: 130px;
+  border-radius: 10px;
+  border: 1px solid #ae30e9;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #111;
+}
+
+.folder-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.folder-name {
+  position: relative;
+  z-index: 2;
+  font-size: 0.9rem;
+  padding: 10px;
+}
+
+/* popup */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #111;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #f00;
+}
+
+.file-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.file-list a {
+  color: #0ff;
+  text-decoration: none;
+}
+
+nav a {
+  color: #ff65ff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body class="research">
+
+<main>
+
+<h1 class="glitch">research</h1>
+
+<p class="subtitle">
+This page contains academic reflections, methodology notes, and frameworks.
+</p>
+
+<div class="folder-grid">
+
+  <div class="folder" data-folder="Essays">
+    <img class="folder-preview" src="" data-img="essays.JPG">
+    <div class="folder-name">Essays</div>
+  </div>
+
+  <div class="folder" data-folder="Project Development">
+    <img class="folder-preview" src="" data-img="development.png">
+    <div class="folder-name">Project Development</div>
+  </div>
+
+  <div class="folder" data-folder="Future works">
+    <img class="folder-preview" src="" data-img="future.png">
+    <div class="folder-name">Future works</div>
+  </div>
+
+  <div class="folder" data-folder="Workshops and Lectures">
+    <img class="folder-preview" src="" data-img="workshops.png">
+    <div class="folder-name">Workshops & Lectures</div>
+  </div>
+
+</div>
+
+<div class="popup-overlay" id="popup">
+  <div class="popup-content">
+    <div class="popup-close" id="close">&times;</div>
+    <h2 id="title"></h2>
+    <ul class="file-list" id="list"></ul>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="archive.html">archive</a>
+</nav>
+
+</main>
+
+<script>
+/* =========================
+R2 BASES
+========================= */
+const IMG_BASE = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/research/";
+const DOC_BASE = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/research/";
+
+/* =========================
+FOLDER IMAGES
+========================= */
+document.querySelectorAll(".folder-preview").forEach(img => {
+  img.src = IMG_BASE + img.dataset.img;
+});
+
+/* =========================
+FILES
+========================= */
+const folders = document.querySelectorAll(".folder");
+const popup = document.getElementById("popup");
+const title = document.getElementById("title");
+const list = document.getElementById("list");
+const close = document.getElementById("close");
+
+const folderFiles = {
+  "Essays": [
+    "History of Sublime.pdf",
+    "The Politics of Glitch.pdf",
+    "What do you envision a 'technological sublime' to be_.pdf"
+  ],
+  "Project Development": [
+    "project 01 (mis)communication encounter with the glitch - Documentation Log.pdf",
+    "project 02 The Dawn of Generation 404 - Documentation Log.pdf",
+    "project_03 We are the Weather - Documentation Log.pdf"
+  ],
+  "Future works": [
+    "Elf.png"
+  ],
+  "Workshops and Lectures": [
+    "TouchDesigner Workshop Notes.pdf",
+    "TouchDesigner Workshop.pdf",
+    "Postinternet debate.mp4"
+  ]
+};
+
+folders.forEach(folder => {
+  folder.addEventListener("click", () => {
+
+    const key = folder.dataset.folder;
+    title.textContent = key;
+    list.innerHTML = "";
+
+    (folderFiles[key] || []).forEach(file => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.textContent = file;
+
+      // IMPORTANT: documents come from personalwebsite bucket
+      a.href = DOC_BASE + encodeURIComponent(key) + "/" + encodeURIComponent(file);
+
+      a.target = "_blank";
+
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    popup.style.display = "flex";
+  });
+});
+
+close.onclick = () => popup.style.display = "none";
+popup.onclick = (e) => {
+  if (e.target === popup) popup.style.display = "none";
+};
+</script>
+
+</body>
+</html>
