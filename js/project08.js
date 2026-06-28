@@ -11,16 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Images 1-11 + 1 video
   const reelItems = [
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-1.jpg", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-2.jpg", position: "center" },
-    { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-vid.mp4", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-3.jpg", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-4.jpg", position: "center" },
-    { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-vid.mp4", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-5.jpg", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-6.jpg", position: "center" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-9.jpg", position: "center" },
-    { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-vid.mp4", position: "center" }
+    { type: "image", src: "assets/images/Project08/project08-1.jpg", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-2.jpg", position: "center" },
+    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-3.jpg", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-4.jpg", position: "center" },
+    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-5.jpg", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-6.jpg", position: "center" },
+    { type: "image", src: "assets/images/Project08/project08-9.jpg", position: "center" },
+    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" }
   ];
 
   let currentIndex = Math.floor(Math.random() * reelItems.length);
@@ -85,8 +85,8 @@ const miniRight = document.querySelector(".mini-arrow.right");
 
 if (miniImg && miniLeft && miniRight) {
   const miniItems = [
-    "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-10.jpg",
-    "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/project08-11.jpg"
+    "assets/images/Project08/project08-10.jpg",
+    "assets/images/Project08/project08-11.jpg"
   ];
 
   let miniIndex = 0;

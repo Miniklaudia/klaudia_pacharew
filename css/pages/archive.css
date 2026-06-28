@@ -85,7 +85,7 @@ ARCHIVE BACKGROUND IMAGE
   width: 100vw;
   height: 100vh;
 
-  background-image: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Ilovemyputer.jpg");
+  background-image: url("assets/images/ilovemyputer.jpg");
   background-size: cover;
   background-position: center;
 
@@ -105,7 +105,7 @@ ARCHIVE BACKGROUND IMAGE
   position: absolute;
   inset: 0;
 
-  background-image: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Ilovemyputer.jpg");
+  background-image: url("assets/images/ilovemyputer.jpg");
   background-size: cover;
   background-position: center;
 

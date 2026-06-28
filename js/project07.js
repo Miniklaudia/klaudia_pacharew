@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!container) return;
 
   // Set background image
-  document.body.style.backgroundImage = `url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-1.webp")`;
+  document.body.style.backgroundImage = `url("assets/images/Project07/project07-1.webp")`;
   document.body.style.backgroundSize = "cover";
   document.body.style.backgroundPosition = "center";
   document.body.style.backgroundRepeat = "no-repeat";
@@ -87,11 +87,11 @@ const rightBtn = document.querySelector(".gallery .arrow.right");
 
 // Project 07 assets
 const galleryItems = [
-  { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-1.webp" },
-  { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-2.jpg" },
-  { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-vid1.mp4" },
-  { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-vid2.mp4" },
-  { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-vid3.mp4" },
+  { type: "image", src: "assets/images/Project07/project07-1.webp" },
+  { type: "image", src: "assets/images/Project07/project07-2.jpg" },
+  { type: "video", src: "assets/images/Project07/project07-vid1.mp4" },
+  { type: "video", src: "assets/images/Project07/project07-vid2.mp4" },
+  { type: "video", src: "assets/images/Project07/project07-vid3.mp4" },
 ];
 
 let currentIndex = 0;

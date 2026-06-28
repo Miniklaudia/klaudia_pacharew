@@ -173,8 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== INITIALIZE ALL PROJECT GALLERIES =====
-  initGallery(".project-gallery.project01", "gallery-image-01", 13, "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project01", "project01");
-  initGallery(".project-gallery.project02", "gallery-image", 21, "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project02", "project02");
-  initGallery(".project-gallery.project05", "gallery-image-05", 20, "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project05", "project05");
+  initGallery(".project-gallery.project01", "gallery-image-01", 13, "assets/images/Project01", "project01");
+  initGallery(".project-gallery.project02", "gallery-image", 21, "assets/images/Project02", "project02");
+  initGallery(".project-gallery.project05", "gallery-image-05", 20, "assets/images/Project05", "project05");
 
 });

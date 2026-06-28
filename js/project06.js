@@ -17,10 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const reelItems = [
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-1.jpg" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-4.jpg" },
-    { type: "image", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-3.jpg" },
-    { type: "video", src: "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-2.mp4" }
+    { type: "image", src: "assets/images/Project06/project06-1.jpg" },
+    { type: "image", src: "assets/images/Project06/project06-4.jpg" },
+    { type: "image", src: "assets/images/Project06/project06-3.jpg" },
+    { type: "video", src: "assets/images/Project06/project06-2.mp4" }
   ];
 
   let currentIndex = 0;
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createCircle() {
     const circle = document.createElement("img");
-    circle.src = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/Circle.png";
+    circle.src = "assets/images/Project06/Circle.png";
     circle.className = "circle";
 
     // prevent double-trigger issues
