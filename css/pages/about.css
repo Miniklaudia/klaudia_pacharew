@@ -30,12 +30,11 @@ Mobile = 1 column
 
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 4rem;
+  margin-top: 5rem;
   align-items: start;
 }
-
 /* ============================
 CONTENT BLOCKS
 ============================ */
@@ -216,4 +215,121 @@ CONTACT LINKS
 .about-block.contact a:focus {
   outline: 2px solid #ff00ff;
   outline-offset: 4px;
+}
+
+/* =========================
+HAMSTER LAYER
+========================= */
+
+#hamsterCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  image-rendering: pixelated;
+}
+
+/* top-right hamster HUD */
+
+#hamsterHUD {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 240px;
+  padding: 14px 16px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: white;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid #ff66cc;
+  border-radius: 10px;
+
+  backdrop-filter: blur(8px);
+
+  z-index: 10000;
+
+  box-shadow:
+    0 0 12px rgba(255, 102, 204, 0.35),
+    inset 0 0 18px rgba(255, 102, 204, 0.08);
+
+  transition: all 0.25s ease;
+}
+
+#hamsterHUD:hover {
+  box-shadow:
+    0 0 18px #ff66cc,
+    0 0 30px rgba(255, 102, 204, 0.3),
+    inset 0 0 18px rgba(255, 102, 204, 0.1);
+}
+
+.hamster-title {
+  color: #ff66cc;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 13px;
+  text-shadow: 0 0 8px #ff66cc;
+}
+
+#hamsterStatus {
+  color: #00ffff;
+  font-weight: 500;
+}
+
+.hamster-controls {
+  margin-top: 8px;
+  color: #aaa;
+  opacity: 0.75;
+  font-size: 11px;
+}
+
+/* remove old bottom instruction panel styles if unused */
+
+.hamster-instructions {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  #hamsterHUD {
+    top: auto;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    width: auto;
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+
+  .hamster-controls {
+    font-size: 10px;
+  }
+
+  #scrollTopBtn {
+    display: none;
+  }
+}
+
+body.hamster-game-mode {
+  overflow: hidden;
+}
+
+.hamster-exit-glitch {
+  animation: hamsterScreenGlitch 0.18s infinite;
+}
+
+@keyframes hamsterScreenGlitch {
+  0% {
+    filter: none;
+  }
+  50% {
+    filter: hue-rotate(40deg) contrast(1.15);
+  }
+  100% {
+    filter: none;
+  }
 }
