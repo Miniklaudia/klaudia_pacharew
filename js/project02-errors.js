@@ -11,7 +11,7 @@ const ghostLayer = document.getElementById("ghost-errors");
 // CONFIG
 // ================================
 
-const ERROR_IMAGE_PATH = "assets/errors/";
+const ERROR_IMAGE_PATH = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/errors/";
 
 const ERROR_IMAGES = [
 "error (1).gif","error (1).jpg","error (1).png",

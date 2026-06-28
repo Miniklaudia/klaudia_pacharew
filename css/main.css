@@ -912,7 +912,7 @@ body.project01 .project-gallery .arrow:hover {
 PROJECT 06 — FULL-BACKGROUND IMAGE
 ------------------------------- */
 body.project06 {
-  background: url('../assets/images/Project06/project06-1.jpg') no-repeat center center fixed;
+  background: url('https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-1.jpg') no-repeat center center fixed;
   background-size: cover; /* fills the viewport */
   color: var(--fg);
 }
@@ -1325,7 +1325,7 @@ PUTER GLITCH BACKGROUND IMAGE
   height: auto;
   aspect-ratio: 16 / 10;
 
-  background-image: url("assets/images/ilovemyputer.jpg");
+  background-image: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Ilovemyputer.jpg");
   background-size: cover;
   background-position: center;
 
@@ -1358,7 +1358,7 @@ HORIZONTAL GLITCH SCAN LAYERS
   position: absolute;
   inset: 0;
 
-  background-image: url("assets/images/ilovemyputer.jpg");
+  background-image: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Ilovemyputer.jpg");
   background-size: cover;
   background-position: center;
 
