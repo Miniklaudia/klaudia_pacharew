@@ -1719,3 +1719,44 @@ GLITCH TEXT
 h2:nth-of-type(2) {
   margin-top: 2.5rem;
 }
+
+/* PROJECT 06 GALLERY LAYER FIX */
+body.project06 .project-gallery {
+  position: relative;
+  z-index: 20;
+  margin-top: 3rem;
+}
+
+body.project06 .gallery-container {
+  position: relative;
+  z-index: 21;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+body.project06 .gallery-container img,
+body.project06 .gallery-container video {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  z-index: 22;
+}
+
+body.project06 .project-gallery .arrow {
+  position: relative;
+  z-index: 30;
+}
+
+body.project06 #circle-layer {
+  z-index: 5;
+}
+
+body.project06 main {
+  position: relative;
+  z-index: 10;
+}
