@@ -14,12 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const reelItems = [
-    { type: "image", src: `${R2}/images/Project06/project06-1.jpg` },
-    { type: "image", src: `${R2}/images/Project06/project06-4.jpg` },
-    { type: "image", src: `${R2}/images/Project06/project06-3.jpg` },
-    { type: "video", src: `${R2}/images/Project06/project06-2.mp4` }
-  ];
+
+const reelItems = [
+  { type: "image", src: `${R2}/images/Project06/project06-1.JPG` },
+  { type: "image", src: `${R2}/images/Project06/project06-4.JPG` },
+  { type: "image", src: `${R2}/images/Project06/project06-3.JPG` },
+  { type: "video", src: `${R2}/images/Project06/project06-2.mp4` }
+];
 
   let currentIndex = 0;
 
