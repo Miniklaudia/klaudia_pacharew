@@ -4,293 +4,221 @@
 
 if (document.body.classList.contains("project02")) {
 
-const errorLayer = document.getElementById("error-layer");
-const ghostLayer = document.getElementById("ghost-errors");
+  const errorLayer = document.getElementById("error-layer");
+  const ghostLayer = document.getElementById("ghost-errors");
 
-// ================================
-// CONFIG
-// ================================
+  const ERROR_IMAGE_PATH = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/errors/";
 
-const ERROR_IMAGE_PATH = "assets/errors/";
+  const ERROR_IMAGES = [
+    "error (1).gif","error (1).jpg","error (1).png",
+    "error (2).gif","error (2).JPG","error (2).png",
+    "error (3).gif","error (3).jpg","error (3).png",
+    "error (4).gif","error (4).jpg","error (4).png",
+    "error (5).gif","error (5).JPG","error (5).png",
+    "error (6).gif","error (6).jpg","error (6).png",
+    "error (7).gif","error (7).jpg","error (7).png",
+    "error (8).gif","error (8).jpg","error (8).png",
+    "error (9).gif","error (9).JPG","error (9).png",
+    "error (10).gif","error (10).png",
+    "error (11).jpg","error (11).png",
+    "error (12).jpg","error (12).png",
+    "error (13).JPG","error (13).png",
+    "error (14).jpg","error (14).png",
+    "error (15).jpg","error (15).png",
+    "error (16).JPG","error (16).png",
+    "error (17).png","error (18).png","error (19).png",
+    "error (20).png","error (21).png","error (22).png",
+    "error (23).png","error (24).png"
+  ];
 
-const ERROR_IMAGES = [
-"error (1).gif","error (1).jpg","error (1).png",
-"error (2).gif","error (2).JPG","error (2).png",
-"error (3).gif","error (3).jpg","error (3).png",
-"error (4).gif","error (4).jpg","error (4).png",
-"error (5).gif","error (5).JPG","error (5).png",
-"error (6).gif","error (6).jpg","error (6).png",
-"error (7).gif","error (7).jpg","error (7).png",
-"error (8).gif","error (8).jpg","error (8).png",
-"error (9).gif","error (9).JPG","error (9).png",
-"error (10).gif","error (10).png",
-"error (11).jpg","error (11).png",
-"error (12).jpg","error (12).png",
-"error (13).JPG","error (13).png",
-"error (14).jpg","error (14).png",
-"error (15).jpg","error (15).png",
-"error (16).JPG","error (16).png",
-"error (17).png","error (18).png","error (19).png",
-"error (20).png","error (21).png","error (22).png",
-"error (23).png","error (24).png"
-];
+  const MAX_ERRORS = 6;
+  const SPAWN_INTERVAL = 6000;
 
-const MAX_ERRORS = 6;
-const SPAWN_INTERVAL = 6000;
+  const rand = (min, max) => Math.random() * (max - min) + min;
 
-const rand = (min,max)=>Math.random()*(max-min)+min;
+  let mouseX = 0;
+  let mouseY = 0;
 
-let mouseX = 0;
-let mouseY = 0;
+  window.addEventListener("mousemove", e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-window.addEventListener("mousemove",e=>{
-mouseX = e.clientX;
-mouseY = e.clientY;
-});
+  function imageURL(filename) {
+    return ERROR_IMAGE_PATH + encodeURIComponent(filename);
+  }
 
-// ========================================
-// GHOST ERRORS (BACKGROUND)
-// ========================================
+  function spawnGhost() {
+    if (!ghostLayer) return;
 
-function spawnGhost(){
+    const src = ERROR_IMAGES[Math.floor(Math.random() * ERROR_IMAGES.length)];
 
-const src = ERROR_IMAGES[Math.floor(Math.random()*ERROR_IMAGES.length)];
+    const ghost = document.createElement("div");
+    ghost.className = "ghost-error";
 
-const ghost = document.createElement("div");
-ghost.className = "ghost-error";
+    const img = document.createElement("img");
+    img.src = imageURL(src);
 
-const img = document.createElement("img");
+    const size = rand(600, 900);
+    img.style.width = size + "px";
 
-img.src = ERROR_IMAGE_PATH + src;
+    ghost.appendChild(img);
+    ghostLayer.appendChild(ghost);
 
-const size = rand(600,900);
+    let x = rand(-300, window.innerWidth);
+    let y = rand(-300, window.innerHeight);
 
-img.style.width = size + "px";
+    let vx = rand(-0.05, 0.05);
+    let vy = rand(-0.05, 0.05);
 
-ghost.appendChild(img);
-ghostLayer.appendChild(ghost);
+    ghost.style.left = x + "px";
+    ghost.style.top = y + "px";
 
-let x = rand(-300,window.innerWidth);
-let y = rand(-300,window.innerHeight);
+    function float() {
+      x += vx;
+      y += vy;
 
-let vx = rand(-0.05,0.05);
-let vy = rand(-0.05,0.05);
+      if (x < -400 || x > window.innerWidth + 400) vx *= -1;
+      if (y < -400 || y > window.innerHeight + 400) vy *= -1;
 
-ghost.style.left = x+"px";
-ghost.style.top = y+"px";
+      ghost.style.left = x + "px";
+      ghost.style.top = y + "px";
 
-function float(){
+      requestAnimationFrame(float);
+    }
 
-x += vx;
-y += vy;
+    float();
+  }
 
-if(x<-400 || x>window.innerWidth+400) vx*=-1;
-if(y<-400 || y>window.innerHeight+400) vy*=-1;
+  function spawnError() {
+    if (!errorLayer) return;
+    if (errorLayer.children.length >= MAX_ERRORS) return;
 
-ghost.style.left = x+"px";
-ghost.style.top = y+"px";
+    const src = ERROR_IMAGES[Math.floor(Math.random() * ERROR_IMAGES.length)];
 
-requestAnimationFrame(float);
+    const wrapper = document.createElement("div");
+    wrapper.className = "error-window";
 
-}
+    const img = document.createElement("img");
+    img.src = imageURL(src);
 
-float();
+    let size;
 
-}
+    if (Math.random() < 0.30) {
+      size = rand(420, 650);
+    } else {
+      size = rand(200, 360);
+    }
 
-// ========================================
-// INTERACTIVE ERROR WINDOWS
-// ========================================
+    img.style.width = size + "px";
 
-function spawnError(){
+    wrapper.appendChild(img);
+    errorLayer.appendChild(wrapper);
 
-if(errorLayer.children.length >= MAX_ERRORS) return;
+    let x = rand(-100, window.innerWidth);
+    let y = rand(-100, window.innerHeight);
 
-const src = ERROR_IMAGES[Math.floor(Math.random()*ERROR_IMAGES.length)];
+    let driftX = rand(-0.1, 0.1);
+    let driftY = rand(-0.1, 0.1);
 
-const wrapper = document.createElement("div");
-wrapper.className = "error-window";
+    let vx = 0;
+    let vy = 0;
 
-const img = document.createElement("img");
-img.src = ERROR_IMAGE_PATH + src;
+    wrapper.style.left = x + "px";
+    wrapper.style.top = y + "px";
 
-// size variation
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
 
-let size;
+    wrapper.addEventListener("mousedown", e => {
+      dragging = true;
+      wrapper.style.zIndex = 10;
 
-if (Math.random() < 0.30) {
-  size = rand(420, 650);
-} else {
-  size = rand(200, 360);
-}
+      offsetX = e.clientX - x;
+      offsetY = e.clientY - y;
 
-img.style.width = size+"px";
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
 
-wrapper.appendChild(img);
-errorLayer.appendChild(wrapper);
+    document.addEventListener("mousemove", e => {
+      if (!dragging) return;
 
-// ================================
-// INITIAL POSITION
-// ================================
+      x = e.clientX - offsetX;
+      y = e.clientY - offsetY;
 
-let x = rand(-100,window.innerWidth);
-let y = rand(-100,window.innerHeight);
+      vx = (e.clientX - lastMouseX) * 0.2;
+      vy = (e.clientY - lastMouseY) * 0.2;
 
-let driftX = rand(-0.1,0.1);
-let driftY = rand(-0.1,0.1);
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
 
-let vx = 0;
-let vy = 0;
+      wrapper.style.left = x + "px";
+      wrapper.style.top = y + "px";
+    });
 
-wrapper.style.left = x+"px";
-wrapper.style.top = y+"px";
+    document.addEventListener("mouseup", () => {
+      if (dragging) {
+        dragging = false;
+        wrapper.style.zIndex = 2;
+      }
+    });
 
-// ================================
-// DRAGGING
-// ================================
+    function float() {
+      if (!dragging) {
+        x += driftX + vx;
+        y += driftY + vy;
 
-let dragging=false;
-let offsetX=0;
-let offsetY=0;
+        vx *= 0.97;
+        vy *= 0.97;
 
-let lastMouseX=0;
-let lastMouseY=0;
+        const dx = x - mouseX;
+        const dy = y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-wrapper.addEventListener("mousedown",e=>{
+        const repelRadius = 180;
 
-dragging=true;
+        if (distance > 0 && distance < repelRadius) {
+          const force = (repelRadius - distance) / repelRadius;
+          x += (dx / distance) * force * 6;
+          y += (dy / distance) * force * 6;
+        }
 
-wrapper.style.zIndex=10;
+        if (x < -200 || x > window.innerWidth + 200) driftX *= -1;
+        if (y < -200 || y > window.innerHeight + 200) driftY *= -1;
 
-offsetX=e.clientX-x;
-offsetY=e.clientY-y;
+        wrapper.style.left = x + "px";
+        wrapper.style.top = y + "px";
+      }
 
-lastMouseX=e.clientX;
-lastMouseY=e.clientY;
+      requestAnimationFrame(float);
+    }
 
-});
+    float();
 
-document.addEventListener("mousemove",e=>{
+    setTimeout(() => {
+      wrapper.style.opacity = 0;
 
-if(!dragging) return;
+      setTimeout(() => {
+        wrapper.remove();
+      }, 600);
+    }, rand(15000, 35000));
+  }
 
-x=e.clientX-offsetX;
-y=e.clientY-offsetY;
+  for (let i = 0; i < 3; i++) {
+    spawnGhost();
+  }
 
-vx=(e.clientX-lastMouseX)*0.2;
-vy=(e.clientY-lastMouseY)*0.2;
+  for (let i = 0; i < MAX_ERRORS; i++) {
+    spawnError();
+  }
 
-lastMouseX=e.clientX;
-lastMouseY=e.clientY;
-
-wrapper.style.left=x+"px";
-wrapper.style.top=y+"px";
-
-});
-
-document.addEventListener("mouseup",()=>{
-
-if(dragging){
-dragging=false;
-wrapper.style.zIndex=2;
-}
-
-});
-
-// ================================
-// FLOAT LOOP
-// ================================
-
-function float(){
-
-if(!dragging){
-
-x += driftX + vx;
-y += driftY + vy;
-
-vx *= 0.97;
-vy *= 0.97;
-
-// ================================
-// CURSOR REPEL
-// ================================
-
-const dx = x - mouseX;
-const dy = y - mouseY;
-
-const distance = Math.sqrt(dx*dx + dy*dy);
-
-const repelRadius = 180;
-
-if(distance < repelRadius){
-
-const force = (repelRadius-distance)/repelRadius;
-
-x += (dx/distance)*force*6;
-y += (dy/distance)*force*6;
-
-}
-
-// ================================
-// SOFT BOUNDS
-// ================================
-
-if(x<-200 || x>window.innerWidth+200) driftX *= -1;
-if(y<-200 || y>window.innerHeight+200) driftY *= -1;
-
-wrapper.style.left=x+"px";
-wrapper.style.top=y+"px";
-
-}
-
-requestAnimationFrame(float);
-
-}
-
-float();
-
-// ================================
-// RANDOM DISAPPEAR
-// ================================
-
-setTimeout(()=>{
-
-wrapper.style.opacity=0;
-
-setTimeout(()=>{
-wrapper.remove();
-},600);
-
-}, rand(15000,35000));
-
-}
-
-// ========================================
-// INITIAL GHOST ERRORS
-// ========================================
-
-for(let i=0;i<3;i++){
-spawnGhost();
-}
-
-// ========================================
-// INITIAL INTERACTIVE ERRORS
-// ========================================
-
-for(let i=0;i<MAX_ERRORS;i++){
-spawnError();
-}
-
-// ========================================
-// SPAWN LOOP
-// ========================================
-
-setInterval(()=>{
-
-if(Math.random()<0.6){
-spawnError();
-}
-
-},SPAWN_INTERVAL);
-
+  setInterval(() => {
+    if (Math.random() < 0.6) {
+      spawnError();
+    }
+  }, SPAWN_INTERVAL);
 }

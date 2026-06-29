@@ -1684,3 +1684,33 @@ GLITCH TEXT
   50% { clip-path: inset(40% 0 40% 0); transform: translate(-2px,-1px); }
   100% { clip-path: inset(0 0 80% 0); transform: translate(2px,-2px); }
 }
+
+.project-gallery {
+  position: relative;
+  z-index: 20;
+  margin-top: 3rem;
+}
+
+.gallery-container {
+  position: relative;
+  z-index: 21;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gallery-container img {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  z-index: 22;
+}
+
+.project-gallery .arrow {
+  position: relative;
+  z-index: 30;
+}
