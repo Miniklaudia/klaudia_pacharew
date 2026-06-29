@@ -1,16 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector("body.project04");
-  if (!container) return;
+  if (!document.body.classList.contains("project04")) return;
 
-  const imgElement = document.querySelector("#reel-image");
-  const videoElement = document.querySelector("#reel-video");
+  const imgElement = document.getElementById("reel-image");
+  const videoElement = document.getElementById("reel-video");
   const leftBtn = document.querySelector(".arrow.left");
   const rightBtn = document.querySelector(".arrow.right");
-
-  if (!imgElement || !videoElement || !leftBtn || !rightBtn) {
-    console.log("Project 04 elements missing");
-    return;
-  }
+  const scrollBtn = document.getElementById("scrollTopBtn");
 
   const R2 = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev";
 
@@ -33,22 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
     { type: "image", src: `${R2}/reels/arcade/ar-16.jpg`, position: "center" }
   ];
 
-  let currentIndex = Math.floor(Math.random() * reelItems.length);
+  let currentIndex = 0;
 
   function showItem(index) {
     const item = reelItems[index];
 
     if (item.type === "image") {
       videoElement.pause();
-      videoElement.removeAttribute("src");
       videoElement.style.display = "none";
+      videoElement.removeAttribute("src");
 
       imgElement.src = item.src;
       imgElement.style.objectPosition = item.position || "center";
       imgElement.style.display = "block";
-    }
-
-    if (item.type === "video") {
+    } else {
       imgElement.style.display = "none";
       imgElement.removeAttribute("src");
 
@@ -57,40 +50,23 @@ document.addEventListener("DOMContentLoaded", () => {
       videoElement.style.display = "block";
       videoElement.muted = true;
       videoElement.loop = true;
-      videoElement.playsInline = true;
       videoElement.play().catch(err => console.log("Video autoplay blocked:", err));
     }
   }
 
-  function nextItem() {
-    currentIndex = (currentIndex + 1) % reelItems.length;
-    showItem(currentIndex);
-  }
-
-  function prevItem() {
+  leftBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + reelItems.length) % reelItems.length;
     showItem(currentIndex);
-  }
-
-  leftBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    prevItem();
   });
 
-  rightBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    nextItem();
-  });
-
-  setInterval(() => {
-    let next;
-    do {
-      next = Math.floor(Math.random() * reelItems.length);
-    } while (next === currentIndex);
-
-    currentIndex = next;
+  rightBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % reelItems.length;
     showItem(currentIndex);
-  }, 8000);
+  });
+
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   showItem(currentIndex);
 });
