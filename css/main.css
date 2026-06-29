@@ -491,7 +491,7 @@ ANIMATIONS
   100% {
     background-position: 0 120px;
   }
-}b
+}
 
 body.archive::before {
   background: repeating-linear-gradient(90deg, rgba(140,0,255,0.13), rgba(132,0,255,0.05) 3px, transparent 3px, transparent 6px);
@@ -1759,4 +1759,61 @@ body.project06 #circle-layer {
 body.project06 main {
   position: relative;
   z-index: 10;
+}
+
+/* ================================
+PROJECT 07 — FINAL GALLERY / REEL BUTTON FIX
+PUT THIS AT THE VERY BOTTOM OF main.css
+================================ */
+
+body.project07 .gallery {
+  position: relative;
+  z-index: 50;
+}
+
+body.project07 .gallery-container {
+  position: relative;
+  z-index: 51;
+  width: 100%;
+}
+
+body.project07 .gallery-container img,
+body.project07 .gallery-container video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  position: relative;
+  z-index: 52;
+}
+
+/* force Project 7 arrows back over the reel */
+body.project07 .gallery .arrow {
+  display: block;
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999 !important;
+  pointer-events: auto;
+  cursor: pointer;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 2rem;
+}
+
+body.project07 .gallery .arrow.left {
+  left: 10px;
+}
+
+body.project07 .gallery .arrow.right {
+  right: 10px;
+}
+
+body.project07 .gallery .arrow:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateY(-50%) scale(1.1);
 }
