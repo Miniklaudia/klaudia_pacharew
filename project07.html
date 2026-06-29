@@ -55,38 +55,50 @@
     }
 
     .gallery-container {
+      position: relative;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+      max-width: 760px;
+      margin: 0;
     }
 
     .gallery-container img,
     .gallery-container video {
-      max-width: 100%;
-      max-height: 500px;
+      width: 100%;
+      max-height: 560px;
       object-fit: contain;
       display: block;
+      border-radius: 6px;
     }
 
     .gallery-controls {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      margin-top: 1rem;
       gap: 1rem;
+      margin-top: 1rem;
     }
 
-    .arrow {
+    body.project07 .arrow {
+      display: inline-block;
+      position: relative;
+      z-index: 20;
       font-size: 2rem;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.65);
       border: none;
       cursor: pointer;
       color: white;
-      padding: 0.3rem 0.7rem;
+      padding: 0.3rem 0.8rem;
     }
 
-    .arrow:hover {
+    body.project07 .arrow:hover {
       color: #ff00cc;
+    }
+
+    body.project07 nav {
+      margin-top: 3rem;
+      display: block;
     }
 
     #scrollTopBtn {
@@ -123,11 +135,11 @@
       <div class="text-box">
         <h2>[ Enquiry ]</h2>
         <p>
-          A vital aspect of my work is awakening the body's activity and heightening the senses. This leads to my interest in Brechtian Epic Theatre, particularly the technique of ‘breaking the fourth wall’, shattering this imaginary wall between the audience and the stage. In a similar way, my work attempts to break this wall between the artwork, and with the use of technology it may allow the viewer to access a different level of consciousness or identify with a different perception of time and space. I aim to destabilise the observer's perception particularly through the use of projections or digital screens which act as a window that extends our vision. 
+          A vital aspect of my work is awakening the body's activity and heightening the senses. This leads to my interest in Brechtian Epic Theatre, particularly the technique of ‘breaking the fourth wall’, shattering this imaginary wall between the audience and the stage. In a similar way, my work attempts to break this wall between the artwork, and with the use of technology it may allow the viewer to access a different level of consciousness or identify with a different perception of time and space. I aim to destabilise the observer's perception particularly through the use of projections or digital screens which act as a window that extends our vision.
         </p>
 
         <h2>[ Medium and Software ]</h2>
-        <p>TouchDesigner, video, and creative coding, fabric and wood.</p>
+        <p>TouchDesigner, video, creative coding, fabric and wood.</p>
       </div>
 
       <div class="gallery">
