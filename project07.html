@@ -4,30 +4,31 @@
   <meta charset="UTF-8">
   <title>project 07</title>
 
- <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/reset.css">
   <link rel="stylesheet" href="css/main.css">
 
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================
-       BACKGROUND LAYER
-    ========================= */
+    body.project07 {
+      background: black;
+      overflow-x: hidden;
+    }
+
     .background-image {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/background.jpg") center/cover no-repeat;
-      z-index: -3;
+      background: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-1.webp") center/cover no-repeat;
+      z-index: 0;
     }
 
-    #rectangles-bg {
+    .background-image::after {
+      content: "";
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
+      background: rgba(0,0,0,0.45);
       pointer-events: none;
     }
 
@@ -36,13 +37,9 @@
       z-index: 2;
     }
 
-    /* =========================
-       LAYOUT FIX (IMPORTANT)
-    ========================= */
-
     .project-content {
       display: flex;
-      flex-direction: column; /* FORCE STACKING */
+      flex-direction: column;
       gap: 2rem;
     }
 
@@ -52,7 +49,9 @@
 
     .gallery {
       width: 100%;
-      margin-top: 2rem; /* guarantees separation */
+      margin-top: 2rem;
+      position: relative;
+      z-index: 5;
     }
 
     .gallery-container {
@@ -69,32 +68,27 @@
       display: block;
     }
 
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      gap: 1rem;
+    }
+
     .arrow {
       font-size: 2rem;
-      background: none;
+      background: rgba(0,0,0,0.4);
       border: none;
       cursor: pointer;
       color: white;
-      margin: 0 1rem;
+      padding: 0.3rem 0.7rem;
     }
 
-    /* =========================
-       MOBILE SAFETY
-    ========================= */
-    @media (max-width: 768px) {
-      .gallery-container img,
-      .gallery-container video {
-        max-height: 300px;
-      }
-
-      .arrow {
-        font-size: 1.5rem;
-      }
+    .arrow:hover {
+      color: #ff00cc;
     }
 
-    /* =========================
-       BACK TO TOP BUTTON
-    ========================= */
     #scrollTopBtn {
       position: fixed;
       bottom: 20px;
@@ -109,23 +103,14 @@
       font-size: 1.2rem;
       cursor: pointer;
       box-shadow: 0 0 15px 5px rgba(255,255,255,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
       opacity: 0.9;
-    }
-
-    #scrollTopBtn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px 10px rgba(255,255,255,0.9);
-      opacity: 1;
     }
   </style>
 </head>
 
 <body class="project project07">
 
-  <!-- BACKGROUND -->
   <div class="background-image"></div>
-  <canvas id="rectangles-bg"></canvas>
 
   <main>
 
@@ -138,31 +123,28 @@
       <div class="text-box">
         <h2>[ Enquiry ]</h2>
         <p>
-          A vital aspect of my work is awakening the body's activity and heightening the senses. This leads to my interest in Brechtian Epic Theatre...
+          A vital aspect of my work is awakening the body's activity and heightening the senses. This leads to my interest in Brechtian Epic Theatre, particularly the technique of ‘breaking the fourth wall’, shattering this imaginary wall between the audience and the stage. In a similar way, my work attempts to break this wall between the artwork, and with the use of technology it may allow the viewer to access a different level of consciousness or identify with a different perception of time and space. I aim to destabilise the observer's perception particularly through the use of projections or digital screens which act as a window that extends our vision. 
         </p>
 
         <h2>[ Medium and Software ]</h2>
-        <p>TouchDesigner, video, creative coding, fabric and wood.</p>
+        <p>TouchDesigner, video, and creative coding, fabric and wood.</p>
       </div>
 
-      <!-- GALLERY (NOW ALWAYS BELOW TEXT) -->
       <div class="gallery">
-
         <div class="gallery-container">
           <img
             id="gallery-image"
-            src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-1.jpg"
+            src="https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project07/project07-1.webp"
             alt="project 07 image"
           />
 
           <video id="gallery-video" controls style="display:none;"></video>
         </div>
 
-        <div style="display:flex; justify-content:center; align-items:center;">
+        <div class="gallery-controls">
           <button class="arrow left">&#10094;</button>
           <button class="arrow right">&#10095;</button>
         </div>
-
       </div>
 
     </div>
@@ -176,14 +158,6 @@
   <button id="scrollTopBtn">↑</button>
 
   <script src="js/project07.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("scrollTopBtn").addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  </script>
 
 </body>
 </html>
