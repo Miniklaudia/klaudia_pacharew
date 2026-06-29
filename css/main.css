@@ -912,8 +912,8 @@ body.project01 .project-gallery .arrow:hover {
 PROJECT 06 — FULL-BACKGROUND IMAGE
 ------------------------------- */
 body.project06 {
-  background: url('../assets/images/Project06/project06-1.jpg') no-repeat center center fixed;
-  background-size: cover; /* fills the viewport */
+background: url("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project06/project06-1.JPG") no-repeat center center fixed;
+  background-size: cover;
   color: var(--fg);
 }
 
