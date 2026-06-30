@@ -100,7 +100,15 @@ hud.innerHTML = `
   </div>
 `;
 document.body.appendChild(hud);
+hud.addEventListener("click", () => {
+  if (!isMobile) return;
 
+  if (sleeping) {
+    wakeHamster();
+  } else {
+    sleepHamster();
+  }
+});
 function setStatus(text) {
   const el = document.getElementById("hamsterStatus");
   if (el) el.textContent = text;
@@ -114,7 +122,7 @@ let active = false;
 if (isMobile) {
   active = true;
 }
-let sleeping = !isMobile;
+let sleeping = true;
 let gameMode = false;
 let cameraX = 0;
 let gameComplete = false;
@@ -203,7 +211,7 @@ function wakeHamster() {
 
   hamster.x = isMobile ? 60 : 120;
   hamster.y = window.scrollY + 120;
-  hamster.vx = isMobile ? 1.2 : 0;
+  hamster.vx = 0;
   hamster.vy = 0;
   hamster.dir = 1;
   hamster.grounded = false;
@@ -432,8 +440,13 @@ function updatePageMode() {
   const moving = isMobile || keys.a || keys.d;
 
   if (isMobile) {
-    hamster.vx = 1.15;
-    hamster.dir = 1;
+    
+  hamster.vx = 0;
+  hamster.vy = 0;
+  hamster.grounded = true;
+  setState("idle");
+  setStatus("chilling");
+  return;
   } else if (keys.a) {
     hamster.vx = -2.2;
   } else if (keys.d) {
@@ -767,9 +780,7 @@ function loop() {
 
 buildPlatforms();
 
-if (isMobile) {
-  wakeHamster();
-}
+
 
 loop();
 
