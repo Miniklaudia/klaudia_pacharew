@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.commandsToSkipShell": [
+        "onCommand:mobile-preview.show"
+    ]
+}

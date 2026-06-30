@@ -2,6 +2,10 @@
 ABOUT PAGE
 ============================ */
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body.about-page {
   background: black;
   color: white;
@@ -22,12 +26,6 @@ main {
 ABOUT GRID
 ============================ */
 
-/* 
-Desktop = 4 columns
-Medium screens = 2 columns
-Mobile = 1 column
-*/
-
 .about-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(220px, 1fr));
@@ -35,6 +33,7 @@ Mobile = 1 column
   margin-top: 5rem;
   align-items: start;
 }
+
 /* ============================
 CONTENT BLOCKS
 ============================ */
@@ -45,8 +44,6 @@ CONTENT BLOCKS
   max-width: 100%;
   margin-top: 1rem;
 }
-
-/* contact section */
 
 .about-block.contact {
   margin-top: 3rem;
@@ -75,7 +72,9 @@ PARAGRAPHS
   font-size: clamp(0.95rem, 1vw, 1.05rem);
 }
 
-/* links */
+/* ============================
+LINKS
+============================ */
 
 .about-block a {
   color: white;
@@ -122,64 +121,6 @@ p {
 }
 
 /* ============================
-LARGE TABLETS / SMALL LAPTOPS
-============================ */
-
-@media (max-width: 1200px) {
-
-  .about-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ============================
-TABLET
-============================ */
-
-@media (max-width: 800px) {
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  main {
-    padding: 1.5rem;
-  }
-
-  .about-block {
-    margin-top: 0.5rem;
-  }
-}
-
-/* ============================
-MOBILE
-============================ */
-
-@media (max-width: 480px) {
-
-  main {
-    padding: 1rem;
-  }
-
-  .about-block p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  #scrollTopBtn {
-    bottom: 15px;
-    right: 15px;
-    padding: 10px 14px;
-    font-size: 0.8rem;
-  }
-}
-
-/* ============================
 CONTACT LINKS
 ============================ */
 
@@ -191,16 +132,12 @@ CONTACT LINKS
   font-weight: 500;
 }
 
-/* hover */
-
 .about-block.contact a:hover {
   color: #00ffff;
   text-shadow:
     0 0 5px #00ffff,
     0 0 12px #00ffff;
 }
-
-/* click / tap */
 
 .about-block.contact a:active {
   color: #ffff00;
@@ -209,8 +146,6 @@ CONTACT LINKS
     0 0 14px #ffff00;
   transform: scale(0.97);
 }
-
-/* keyboard accessibility */
 
 .about-block.contact a:focus {
   outline: 2px solid #ff00ff;
@@ -230,8 +165,6 @@ HAMSTER LAYER
   z-index: 9999;
   image-rendering: pixelated;
 }
-
-/* top-right hamster HUD */
 
 #hamsterHUD {
   position: fixed;
@@ -288,25 +221,46 @@ HAMSTER LAYER
   font-size: 11px;
 }
 
-/* remove old bottom instruction panel styles if unused */
-
 .hamster-instructions {
   display: none;
 }
 
-@media (max-width: 700px) {
+/* ============================
+RESPONSIVE
+============================ */
 
+@media (max-width: 1200px) {
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
   main {
-  padding-bottom: 130px;
+    padding: 1.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-block {
+    margin-top: 0.5rem;
+  }
 }
 
-nav {
-  margin-bottom: 90px;
-}
-  
+@media (max-width: 768px) {
+  main {
+    padding-bottom: 150px;
+  }
+
+  nav {
+    margin-bottom: 110px;
+  }
+
   #hamsterHUD {
     top: auto;
-    bottom: 15px;
+    bottom: calc(15px + env(safe-area-inset-bottom));
     left: 15px;
     right: 15px;
     width: auto;
@@ -322,6 +276,28 @@ nav {
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  main {
+    padding: 1rem;
+    padding-bottom: 150px;
+  }
+
+  .about-block p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 110px;
+  }
+}
+
+/* ============================
+HAMSTER GAME MODE
+============================ */
 
 body.hamster-game-mode {
   overflow: hidden;
@@ -342,4 +318,3 @@ body.hamster-game-mode {
     filter: none;
   }
 }
-
