@@ -94,7 +94,7 @@ hud.innerHTML = `
       <div class="hamster-title">hamster.exe</div>
       <div id="hamsterStatus">sleeping</div>
       <div class="hamster-controls">
-        ${isMobile ? "MOBILE • AUTO WALK • TAP JUMP" : "ENTER • ESC • A/D • SPACE"}
+        ${isMobile ? "TAP WIDGET • WAKE / SLEEP" : "ENTER • ESC • A/D • SPACE"}
       </div>
     </div>
   </div>
@@ -222,7 +222,7 @@ function wakeHamster() {
 
   if (spriteFailed) setStatus("sprite failed");
   else if (!spriteLoaded) setStatus("loading sprite");
-  else setStatus(isMobile ? "tap jumping" : "curious");
+  else setStatus(isMobile ? "chilling" : "curious");
 }
 
 function sleepHamster() {
@@ -279,18 +279,8 @@ document.addEventListener("keyup", (e) => {
   if (key === "d") keys.d = false;
 });
 
-canvas.addEventListener("touchstart", (e) => {
-  if (!isMobile) return;
 
-  e.preventDefault();
 
-  if (!active || sleeping) {
-    wakeHamster();
-    return;
-  }
-
-  jump();
-}, { passive: false });
 
 canvas.addEventListener("click", () => {
   if (!isMobile) return;
