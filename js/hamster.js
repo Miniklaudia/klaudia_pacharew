@@ -56,6 +56,32 @@ sprite.onerror = () => {
 };
 
 /* =========================
+SOUND
+========================= */
+
+const gameSound = new Audio("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/hamster/hamster-game.mp3");
+gameSound.loop = true;
+gameSound.volume = 0.25;
+
+const deathSound = new Audio("https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/hamster/hamster-death.mp3");
+deathSound.loop = false;
+deathSound.volume = 0.45;
+
+function startGameSound() {
+  gameSound.play().catch(() => {});
+}
+
+function stopGameSound() {
+  gameSound.pause();
+  gameSound.currentTime = 0;
+}
+
+function playDeathSound() {
+  deathSound.currentTime = 0;
+  deathSound.play().catch(() => {});
+}
+
+/* =========================
 HUD
 ========================= */
 
@@ -181,6 +207,7 @@ function wakeHamster() {
 
   setState("idle");
   buildPlatforms();
+  startGameSound();
 
   if (spriteFailed) setStatus("sprite failed");
   else if (!spriteLoaded) setStatus("loading sprite");
@@ -200,6 +227,7 @@ function sleepHamster() {
 
   setState("sleep");
   setStatus("sleeping");
+  stopGameSound();
 }
 
 document.addEventListener("keydown", (e) => {
@@ -348,6 +376,7 @@ function completeGameMode() {
 
     setState("sleep");
     setStatus("escaped / sleeping");
+    stopGameSound();
   }, 700);
 }
 
@@ -428,6 +457,7 @@ function updatePageMode() {
   }
 
   if (hamster.y > document.body.scrollHeight + 200) {
+    playDeathSound();
     hamster.x = isMobile ? 60 : 120;
     hamster.y = window.scrollY + 120;
     hamster.vx = isMobile ? 1.2 : 0;
@@ -469,6 +499,7 @@ function updateGameMode() {
   cameraX = Math.max(0, Math.min(level.width - window.innerWidth, cameraX));
 
   if (hamster.y > window.innerHeight + 200) {
+    playDeathSound();
     hamster.x = 80;
     hamster.y = 300;
     hamster.vx = 0;
