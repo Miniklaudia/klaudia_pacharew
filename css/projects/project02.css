@@ -237,3 +237,14 @@ p,
     right: 1rem;
   }
 }
+
+.error-window {
+  position: absolute;
+  touch-action: none;
+  user-select: none;
+}
+
+.error-window img {
+  pointer-events: none;
+  user-select: none;
+}

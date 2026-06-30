@@ -39,7 +39,7 @@ if (document.body.classList.contains("project02")) {
   let mouseX = 0;
   let mouseY = 0;
 
-  window.addEventListener("mousemove", e => {
+  window.addEventListener("pointermove", e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
@@ -127,24 +127,31 @@ if (document.body.classList.contains("project02")) {
     wrapper.style.left = x + "px";
     wrapper.style.top = y + "px";
 
+    // draggable on desktop + mobile
     let dragging = false;
     let offsetX = 0;
     let offsetY = 0;
     let lastMouseX = 0;
     let lastMouseY = 0;
 
-    wrapper.addEventListener("mousedown", e => {
+    wrapper.style.touchAction = "none";
+    wrapper.style.cursor = "grab";
+
+    wrapper.addEventListener("pointerdown", e => {
       dragging = true;
-      wrapper.style.zIndex = 10;
+      wrapper.style.zIndex = 999;
+      wrapper.style.cursor = "grabbing";
 
       offsetX = e.clientX - x;
       offsetY = e.clientY - y;
 
       lastMouseX = e.clientX;
       lastMouseY = e.clientY;
+
+      wrapper.setPointerCapture(e.pointerId);
     });
 
-    document.addEventListener("mousemove", e => {
+    wrapper.addEventListener("pointermove", e => {
       if (!dragging) return;
 
       x = e.clientX - offsetX;
@@ -160,11 +167,20 @@ if (document.body.classList.contains("project02")) {
       wrapper.style.top = y + "px";
     });
 
-    document.addEventListener("mouseup", () => {
-      if (dragging) {
-        dragging = false;
-        wrapper.style.zIndex = 2;
-      }
+    wrapper.addEventListener("pointerup", e => {
+      dragging = false;
+      wrapper.style.zIndex = 2;
+      wrapper.style.cursor = "grab";
+
+      try {
+        wrapper.releasePointerCapture(e.pointerId);
+      } catch {}
+    });
+
+    wrapper.addEventListener("pointercancel", () => {
+      dragging = false;
+      wrapper.style.zIndex = 2;
+      wrapper.style.cursor = "grab";
     });
 
     function float() {
@@ -200,6 +216,8 @@ if (document.body.classList.contains("project02")) {
     float();
 
     setTimeout(() => {
+      if (dragging) return;
+
       wrapper.style.opacity = 0;
 
       setTimeout(() => {

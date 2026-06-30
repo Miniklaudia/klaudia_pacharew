@@ -94,7 +94,7 @@ hud.innerHTML = `
       <div class="hamster-title">hamster.exe</div>
       <div id="hamsterStatus">sleeping</div>
       <div class="hamster-controls">
-        ${isMobile ? "TAP • JUMP" : "ENTER • ESC • A/D • SPACE"}
+        ${isMobile ? "MOBILE • AUTO WALK • TAP JUMP" : "ENTER • ESC • A/D • SPACE"}
       </div>
     </div>
   </div>
@@ -111,7 +111,10 @@ STATE
 ========================= */
 
 let active = false;
-let sleeping = true;
+if (isMobile) {
+  active = true;
+}
+let sleeping = !isMobile;
 let gameMode = false;
 let cameraX = 0;
 let gameComplete = false;
@@ -404,6 +407,23 @@ UPDATE
 ========================= */
 
 function update() {
+
+  if (isMobile && active) {
+  hamster.vx = 0.5 * hamster.dir;
+
+  if (hamster.x < 20) {
+    hamster.dir = 1;
+  }
+
+  if (hamster.x > window.innerWidth - hamster.w - 20) {
+    hamster.dir = -1;
+  }
+
+  hamster.x += hamster.vx;
+  hamster.y += Math.sin(Date.now() * 0.002) * 0.3;
+
+  return;
+}
   if (!active) return;
 
   if (sleeping) {
@@ -761,6 +781,11 @@ function loop() {
 }
 
 buildPlatforms();
+
+if (isMobile) {
+  wakeHamster();
+}
+
 loop();
 
 });
