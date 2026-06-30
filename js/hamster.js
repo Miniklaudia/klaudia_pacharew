@@ -408,22 +408,7 @@ UPDATE
 
 function update() {
 
-  if (isMobile && active) {
-  hamster.vx = 0.5 * hamster.dir;
-
-  if (hamster.x < 20) {
-    hamster.dir = 1;
-  }
-
-  if (hamster.x > window.innerWidth - hamster.w - 20) {
-    hamster.dir = -1;
-  }
-
-  hamster.x += hamster.vx;
-  hamster.y += Math.sin(Date.now() * 0.002) * 0.3;
-
-  return;
-}
+  
   if (!active) return;
 
   if (sleeping) {
