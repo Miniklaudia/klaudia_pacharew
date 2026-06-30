@@ -295,6 +295,15 @@ HAMSTER LAYER
 }
 
 @media (max-width: 700px) {
+
+  main {
+  padding-bottom: 130px;
+}
+
+nav {
+  margin-bottom: 90px;
+}
+  
   #hamsterHUD {
     top: auto;
     bottom: 15px;
@@ -334,17 +343,3 @@ body.hamster-game-mode {
   }
 }
 
-@media (max-width: 800px) {
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  main {
-    padding: 1.5rem;
-  }
-
-  .about-block {
-    margin-top: 0.5rem;
-  }
-}
