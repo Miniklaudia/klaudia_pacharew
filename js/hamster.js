@@ -94,7 +94,7 @@ hud.innerHTML = `
       <div class="hamster-title">hamster.exe</div>
       <div id="hamsterStatus">sleeping</div>
       <div class="hamster-controls">
-        ${isMobile ? "TAP WIDGET • MINI GAME" : "ENTER • ESC • A/D • SPACE"}
+        ${isMobile ? "TAP WIDGET • WAKE / SLEEP" : "ENTER • ESC • A/D • SPACE"}
       </div>
     </div>
   </div>
@@ -287,14 +287,7 @@ document.addEventListener("keyup", (e) => {
   if (key === "d") keys.d = false;
 });
 
-canvas.addEventListener("click", () => {
-  if (!isMobile) return;
 
-  // Only jump if we're already in the mini game
-  if (!gameMode || sleeping) return;
-
-  jump();
-});
 
 /* =========================
 GAME MODE
@@ -433,7 +426,11 @@ function updatePageMode() {
   const moving = isMobile || keys.a || keys.d;
 
   if (isMobile) {
-  setState("sleep");
+ hamster.vx = 0;
+  hamster.vy = 0;
+  hamster.grounded = true;
+  setState("idle");
+  setStatus("chilling");
   return;
   } else if (keys.a) {
     hamster.vx = -2.2;

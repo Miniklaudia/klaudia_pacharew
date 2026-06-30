@@ -333,3 +333,18 @@ body.hamster-game-mode {
     filter: none;
   }
 }
+
+@media (max-width: 800px) {
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  .about-block {
+    margin-top: 0.5rem;
+  }
+}
