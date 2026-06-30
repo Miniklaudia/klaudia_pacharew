@@ -281,18 +281,6 @@ document.addEventListener("keyup", (e) => {
 
 
 
-
-canvas.addEventListener("click", () => {
-  if (!isMobile) return;
-
-  if (!active || sleeping) {
-    wakeHamster();
-    return;
-  }
-
-  jump();
-});
-
 /* =========================
 GAME MODE
 ========================= */
