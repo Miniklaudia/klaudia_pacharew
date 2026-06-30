@@ -202,13 +202,11 @@ INPUT
 function wakeHamster() {
   active = true;
   sleeping = false;
+  gameMode = false;
+  document.body.classList.remove("hamster-game-mode");
+
   gameComplete = false;
   exitGlitchTimer = 0;
-
-  canvas.classList.remove("hamster-exit-glitch");
-
-  hamster.x = isMobile ? 60 : 120;
-  hamster.y = window.scrollY + 120;
   hamster.vx = 0;
   hamster.vy = 0;
   hamster.dir = 1;
@@ -414,6 +412,14 @@ function update() {
 
 function updatePageMode() {
   const moving = keys.a || keys.d;
+  if (isMobile) {
+  hamster.vx = 0;
+  hamster.vy = 0;
+  hamster.grounded = true;
+  setState("idle");
+  setStatus("chilling");
+  return;
+}
 
   if (keys.a) {
   hamster.vx = -2.5;
@@ -459,11 +465,7 @@ function updatePageMode() {
 
 function updateGameMode() {
   const moving = keys.a || keys.d;
-
-  if (isMobile) {
-  hamster.vx = 2.1;
-  hamster.dir = 1;
-} else if (keys.a) {
+  if (keys.a) {
   hamster.vx = -2.5;
   hamster.dir = -1;
 } else if (keys.d) {
