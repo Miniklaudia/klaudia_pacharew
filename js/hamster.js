@@ -103,20 +103,13 @@ document.body.appendChild(hud);
 hud.addEventListener("click", () => {
   if (!isMobile) return;
 
-  if (gameMode) {
-    exitGameMode();
-    sleeping = true;
-    active = true;
-    setState("sleep");
-    setStatus("sleeping");
-    stopGameSound();
+  if (sleeping) {
+    wakeHamster();
   } else {
-    active = true;
-    sleeping = false;
-    startGameSound();
-    startGameMode();
+    sleepHamster();
   }
 });
+
 function setStatus(text) {
   const el = document.getElementById("hamsterStatus");
   if (el) el.textContent = text;
@@ -126,10 +119,7 @@ function setStatus(text) {
 STATE
 ========================= */
 
-let active = false;
-if (isMobile) {
-  active = true;
-}
+let active = true;
 let sleeping = true;
 let gameMode = false;
 let cameraX = 0;
@@ -294,7 +284,7 @@ GAME MODE
 ========================= */
 
 function startGameMode() {
-  if (gameMode) return;
+  if (gameMode || isMobile) return;
 
   gameMode = true;
   gameComplete = false;
@@ -423,18 +413,12 @@ function update() {
 }
 
 function updatePageMode() {
-  const moving = isMobile || keys.a || keys.d;
+  const moving = keys.a || keys.d;
 
-  if (isMobile) {
- hamster.vx = 0;
-  hamster.vy = 0;
-  hamster.grounded = true;
-  setState("idle");
-  setStatus("chilling");
-  return;
-  } else if (keys.a) {
-    hamster.vx = -2.2;
-  } else if (keys.d) {
+  if (keys.a) {
+  hamster.vx = -2.5;
+  hamster.dir = -1;
+} else if (keys.d) {
     hamster.vx = 2.2;
   } else {
     hamster.vx *= 0.82;
