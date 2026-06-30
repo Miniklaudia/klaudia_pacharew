@@ -1226,89 +1226,67 @@ RESPONSIVE STACKING FIX
 }
 
 /* ================================
-PROJECT 08 — MINI REEL
+PROJECT 08 MINI REEL
 ================================ */
 
-.project08-mini-reel {
-  position: relative;
-  margin-top: 2rem;
-  max-width: 600px;
+.project08-mini-reel{
+    position:relative;
+    width:700px;
+    max-width:100%;
+    margin-top:2rem;
 }
 
-.mini-reel-container img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 6px;
+.mini-reel-container{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border-radius:6px;
+}
+
+.mini-reel-container img{
+    display:block;
+    width:100%;
+    height:420px;
+    object-fit:cover;
 }
 
 /* arrows */
-.mini-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  background: rgba(0,0,0,0.4);
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  cursor: pointer;
-  z-index: 5;
-  transition: background 0.2s ease, transform 0.2s ease;
+
+.project08-mini-reel .mini-arrow{
+
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    cursor:pointer;
+
+    background:rgba(0,0,0,.55);
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:100;
+
+    transition:.2s;
 }
 
-.mini-arrow.left { left: -40px; }
-.mini-arrow.right { right: -40px; }
-
-.mini-arrow:hover {
-  background: rgba(0,0,0,0.7);
-  transform: translateY(-50%) scale(1.1);
+.project08-mini-reel .mini-arrow.left{
+    left:10px;
 }
 
-
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  object-fit: cover;
-
-  transform: translate(-50%, -50%);
-  transform-origin: center;
-
-  transition: transform 0.25s ease, opacity 0.3s ease;
-
-  pointer-events: auto;
-  cursor: pointer;
+.project08-mini-reel .mini-arrow.right{
+    right:10px;
 }
 
-.folder {
-  overflow: hidden;
-  position: relative;
-}
-
-.folder-preview {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  opacity: 0.35;
-  filter: contrast(1.1) brightness(0.8);
-
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.folder:hover .folder-preview {
-  transform: scale(1.1);
-  opacity: 0.55;
-}
-
-.folder-name {
-  position: relative;
-  z-index: 2;
+.project08-mini-reel .mini-arrow:hover{
+    background:rgba(0,0,0,.8);
+    transform:translateY(-50%) scale(1.08);
 }
 
 /* ================================
@@ -1816,4 +1794,27 @@ body.project07 .gallery .arrow.right {
 body.project07 .gallery .arrow:hover {
   background: rgba(0, 0, 0, 0.85);
   transform: translateY(-50%) scale(1.1);
+}
+
+/* ================================
+PROJECT 07 - RETURN BUTTON FIX
+================================ */
+
+body.project07 nav {
+    display: inline-block;
+    margin-top: 2rem;
+}
+
+body.project07 nav a {
+    display: inline-block;
+    width: fit-content;
+
+    padding: 0.45rem 0.8rem;
+
+    background: rgba(0,0,0,0.55);
+    border-radius: 4px;
+
+    white-space: nowrap;
+
+    line-height: 1;
 }

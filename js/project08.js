@@ -1,145 +1,146 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".project08");
-  if (!container) return;
+  const R2_BASE =
+    "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/Project08/";
 
-  const imgElement = container.querySelector("#reel-image");
-  const videoElement = container.querySelector("#reel-video");
-  const leftBtn = container.querySelector(".arrow.left");
-  const rightBtn = container.querySelector(".arrow.right");
+  /* ================================
+     BACKGROUND REEL
+  ================================ */
 
-  if (!imgElement || !videoElement || !leftBtn || !rightBtn) return;
+  const imgElement = document.getElementById("reel-image");
+  const videoElement = document.getElementById("reel-video");
+  const leftBtn = document.querySelector("body.project08 > .arrow.left");
+  const rightBtn = document.querySelector("body.project08 > .arrow.right");
 
-  // Images 1-11 + 1 video
   const reelItems = [
-    { type: "image", src: "assets/images/Project08/project08-1.jpg", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-2.jpg", position: "center" },
-    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-3.jpg", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-4.jpg", position: "center" },
-    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-5.jpg", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-6.jpg", position: "center" },
-    { type: "image", src: "assets/images/Project08/project08-9.jpg", position: "center" },
-    { type: "video", src: "assets/images/Project08/project08-vid.mp4", position: "center" }
+    { type: "image", src: R2_BASE + "project08-1.jpg" },
+    { type: "image", src: R2_BASE + "project08-2.jpg" },
+    { type: "video", src: R2_BASE + "project08-vid.mp4" },
+    { type: "image", src: R2_BASE + "project08-3.jpg" },
+    { type: "image", src: R2_BASE + "project08-4.jpg" },
+    { type: "image", src: R2_BASE + "project08-5.jpg" },
+    { type: "image", src: R2_BASE + "project08-6.jpg" },
+    { type: "image", src: R2_BASE + "project08-7.jpg" },
+    { type: "image", src: R2_BASE + "project08-8.jpg" },
+    { type: "image", src: R2_BASE + "project08-9.JPG" }
   ];
 
-  let currentIndex = Math.floor(Math.random() * reelItems.length);
+  let reelIndex = Math.floor(Math.random() * reelItems.length);
 
-  function showItem(index) {
+  function showReel(index) {
     const item = reelItems[index];
 
+    if (!imgElement || !videoElement) return;
+
     if (item.type === "image") {
+      videoElement.pause();
+      videoElement.removeAttribute("src");
+      videoElement.style.display = "none";
+
       imgElement.src = item.src;
       imgElement.style.display = "block";
-      imgElement.style.objectPosition = item.position || "center";
-      videoElement.pause();
-      videoElement.style.display = "none";
-    }
-
-    if (item.type === "video") {
-      videoElement.src = item.src;
-      videoElement.style.display = "block";
-      videoElement.play();
-      videoElement.style.objectPosition = item.position || "center";
+    } else {
+      imgElement.removeAttribute("src");
       imgElement.style.display = "none";
+
+      videoElement.src = item.src;
+      videoElement.muted = true;
+      videoElement.loop = true;
+      videoElement.style.display = "block";
+      videoElement.play().catch(() => {});
     }
   }
 
-  function nextItem() {
-    currentIndex = (currentIndex + 1) % reelItems.length;
-    showItem(currentIndex);
+  function nextReel() {
+    reelIndex = (reelIndex + 1) % reelItems.length;
+    showReel(reelIndex);
   }
 
-  function prevItem() {
-    currentIndex = (currentIndex - 1 + reelItems.length) % reelItems.length;
-    showItem(currentIndex);
+  function prevReel() {
+    reelIndex = (reelIndex - 1 + reelItems.length) % reelItems.length;
+    showReel(reelIndex);
   }
 
-  leftBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    prevItem();
-  });
+  if (leftBtn) leftBtn.addEventListener("click", prevReel);
+  if (rightBtn) rightBtn.addEventListener("click", nextReel);
 
-  rightBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    nextItem();
-  });
+  showReel(reelIndex);
+  setInterval(nextReel, 8000);
 
-  // autoplay every 8s
-  setInterval(() => {
-    let next;
-    do {
-      next = Math.floor(Math.random() * reelItems.length);
-    } while (next === currentIndex);
-    currentIndex = next;
-    showItem(currentIndex);
-  }, 8000);
+  /* ================================
+     MINI REEL
+  ================================ */
 
-  showItem(currentIndex);
-});
+  const miniImg = document.getElementById("mini-reel-image");
+  const miniLeft = document.querySelector(
+    ".project08-mini-reel .mini-arrow.left"
+  );
+  const miniRight = document.querySelector(
+    ".project08-mini-reel .mini-arrow.right"
+  );
+  const miniReel = document.querySelector(".project08-mini-reel");
 
-// MINI REEL (images 10 & 11)
-const miniImg = document.querySelector("#mini-reel-image");
-const miniLeft = document.querySelector(".mini-arrow.left");
-const miniRight = document.querySelector(".mini-arrow.right");
-
-if (miniImg && miniLeft && miniRight) {
   const miniItems = [
-    "assets/images/Project08/project08-10.jpg",
-    "assets/images/Project08/project08-11.jpg"
+    R2_BASE + "project08-10.JPG",
+    R2_BASE + "project08-11.JPG"
   ];
 
   let miniIndex = 0;
 
   function showMini(index) {
+    if (!miniImg) return;
+
     miniImg.src = miniItems[index];
+    miniImg.style.display = "block";
+    miniImg.style.opacity = "1";
+    miniImg.style.visibility = "visible";
   }
 
-  miniLeft.addEventListener("click", () => {
+  function nextMini() {
+    miniIndex = (miniIndex + 1) % miniItems.length;
+    showMini(miniIndex);
+  }
+
+  function prevMini() {
     miniIndex = (miniIndex - 1 + miniItems.length) % miniItems.length;
     showMini(miniIndex);
-  });
-
-  miniRight.addEventListener("click", () => {
-    miniIndex = (miniIndex + 1) % miniItems.length;
-    showMini(miniIndex);
-  });
-
-  // optional autoplay (slow + subtle)
-  setInterval(() => {
-    miniIndex = (miniIndex + 1) % miniItems.length;
-    showMini(miniIndex);
-  }, 6000);
-
-  showMini(miniIndex);
-}
-const miniReel = document.querySelector(".project08-mini-reel");
-
-let startX = 0;
-let endX = 0;
-
-miniReel.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-});
-
-miniReel.addEventListener("touchend", (e) => {
-  endX = e.changedTouches[0].clientX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  const diff = startX - endX;
-
-  // threshold so tiny taps don't trigger swipe
-  if (Math.abs(diff) < 40) return;
-
-  if (diff > 0) {
-    // swipe left → next image
-    currentIndex = (currentIndex + 1) % galleryItems.length;
-  } else {
-    // swipe right → previous image
-    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
   }
 
-  showImage(currentIndex);
-}
+  if (miniLeft) miniLeft.addEventListener("click", prevMini);
+  if (miniRight) miniRight.addEventListener("click", nextMini);
+
+  if (miniReel) {
+    let startX = 0;
+
+    miniReel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    miniReel.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) < 40) return;
+
+      if (diff > 0) nextMini();
+      else prevMini();
+    });
+  }
+
+  showMini(miniIndex);
+  setInterval(nextMini, 6000);
+
+  /* ================================
+     SCROLL TO TOP
+  ================================ */
+
+  const scrollBtn = document.getElementById("scrollTopBtn");
+
+  if (scrollBtn) {
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+});
