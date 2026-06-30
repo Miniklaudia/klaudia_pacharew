@@ -94,7 +94,7 @@ hud.innerHTML = `
       <div class="hamster-title">hamster.exe</div>
       <div id="hamsterStatus">sleeping</div>
       <div class="hamster-controls">
-        ${isMobile ? "TAP WIDGET • WAKE / SLEEP" : "ENTER • ESC • A/D • SPACE"}
+        ${isMobile ? "TAP WIDGET • MINI GAME" : "ENTER • ESC • A/D • SPACE"}
       </div>
     </div>
   </div>
@@ -103,10 +103,18 @@ document.body.appendChild(hud);
 hud.addEventListener("click", () => {
   if (!isMobile) return;
 
-  if (sleeping) {
-    wakeHamster();
+  if (gameMode) {
+    exitGameMode();
+    sleeping = true;
+    active = true;
+    setState("sleep");
+    setStatus("sleeping");
+    stopGameSound();
   } else {
-    sleepHamster();
+    active = true;
+    sleeping = false;
+    startGameSound();
+    startGameMode();
   }
 });
 function setStatus(text) {
@@ -279,14 +287,21 @@ document.addEventListener("keyup", (e) => {
   if (key === "d") keys.d = false;
 });
 
+canvas.addEventListener("click", () => {
+  if (!isMobile) return;
 
+  // Only jump if we're already in the mini game
+  if (!gameMode || sleeping) return;
+
+  jump();
+});
 
 /* =========================
 GAME MODE
 ========================= */
 
 function startGameMode() {
-  if (gameMode || isMobile) return;
+  if (gameMode) return;
 
   gameMode = true;
   gameComplete = false;
@@ -418,12 +433,7 @@ function updatePageMode() {
   const moving = isMobile || keys.a || keys.d;
 
   if (isMobile) {
-    
-  hamster.vx = 0;
-  hamster.vy = 0;
-  hamster.grounded = true;
-  setState("idle");
-  setStatus("chilling");
+  setState("sleep");
   return;
   } else if (keys.a) {
     hamster.vx = -2.2;
@@ -469,15 +479,18 @@ function updatePageMode() {
 function updateGameMode() {
   const moving = keys.a || keys.d;
 
-  if (keys.a) {
-    hamster.vx = -2.5;
-    hamster.dir = -1;
-  } else if (keys.d) {
-    hamster.vx = 2.5;
-    hamster.dir = 1;
-  } else {
-    hamster.vx *= 0.82;
-  }
+  if (isMobile) {
+  hamster.vx = 2.1;
+  hamster.dir = 1;
+} else if (keys.a) {
+  hamster.vx = -2.5;
+  hamster.dir = -1;
+} else if (keys.d) {
+  hamster.vx = 2.5;
+  hamster.dir = 1;
+} else {
+  hamster.vx *= 0.82;
+}
 
   hamster.vy += 0.34;
 
