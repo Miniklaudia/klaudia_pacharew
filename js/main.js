@@ -27,12 +27,10 @@ function glitchText(element) {
 // ===== MAIN DOCUMENT READY =====
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===== GLITCH ON HOVER =====
   document.querySelectorAll("h1, p, nav a, .file").forEach(el => {
     el.addEventListener("mouseenter", () => glitchText(el));
   });
 
-  // ===== ARCHIVE / PROJECT DROPDOWN TOGGLE =====
   document.querySelectorAll(".file").forEach(file => {
     file.addEventListener("click", () => {
       const content = file.nextElementSibling;
@@ -45,13 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== SCROLL TO TOP BUTTON =====
   const scrollBtn = document.getElementById("scrollTopBtn");
   scrollBtn?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  // ===== CURSOR-BASED GLITCH =====
   document.addEventListener("mousemove", () => {
     document.querySelectorAll("h1.glitch, p, .file, .archive-image").forEach(el => {
       if (Math.random() < 0.005) {
@@ -67,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== TEMPORAL GLITCH =====
   function randomGlitch() {
     const elements = document.querySelectorAll("h1.glitch, p, .file, .archive-image");
     const element = elements[Math.floor(Math.random() * elements.length)];
@@ -101,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(randomGlitch, 1500);
 
-  // ===== RANDOM BACKGROUND GLITCH =====
   function randomBackgroundGlitch() {
     const body = document.body;
 
@@ -130,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(randomBackgroundGlitch, 1000);
 
-  // ===== GLITCH OVERLAY FOR HOME =====
   const homeFlicker = document.createElement("div");
   homeFlicker.style.position = "fixed";
   homeFlicker.style.top = "0";
@@ -157,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(occasionalHomeFlicker, 300);
 
-  // ===== UNIVERSAL VIDEO SOUND TOGGLE =====
   document.querySelectorAll("video").forEach(video => {
     const container = video.closest("main") || document;
     const audioBtn = container.querySelector("#play-sound, .play-sound");
@@ -181,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== UNIVERSAL GALLERY INITIALIZER =====
-  function initGallery(containerSelector, imageId, numImages, folderPath, prefix) {
+  function initGallery(containerSelector, imageId, imageFiles, folderPath) {
     const galleryContainer = document.querySelector(containerSelector);
     const galleryImage = document.getElementById(imageId);
 
@@ -192,10 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!leftArrow || !rightArrow) return;
 
-    const images = Array.from(
-      { length: numImages },
-      (_, i) => `${R2}/${folderPath}/${prefix}-${i + 1}.jpg`
-    );
+    const images = imageFiles.map(file => `${R2}/${folderPath}/${file}`);
 
     let index = 0;
 
@@ -217,9 +206,38 @@ document.addEventListener("DOMContentLoaded", () => {
     showImage(index);
   }
 
+  // ===== IMAGE LISTS =====
+  const project01Images = Array.from({ length: 13 }, (_, i) => `project01-${i + 1}.jpg`);
+
+  const project02Images = [
+    "project02-1.jpg",
+    "project02-2.jpg",
+    "project02-3.jpg",
+    "project02-4.jpg",
+    "project02-5.jpg",
+    "project02-6.jpg",
+    "project02-7.jpg",
+    "project02-8.jpg",
+    "project02-9.jpg",
+    "project02-10.jpg",
+    "project02-11.jpg",
+    "project02-12.jpg",
+    "project02-13.jpg",
+    "project02-14.jpg",
+    "project02-15.jpg",
+    "project02-16.jpg",
+    "project02-17.JPG",
+    "project02-18.JPG",
+    "project02-19.JPG",
+    "project02-20.JPG",
+    "project02-21.JPG"
+  ];
+
+  const project05Images = Array.from({ length: 20 }, (_, i) => `project05-${i + 1}.jpg`);
+
   // ===== INITIALIZE PROJECT GALLERIES =====
-  initGallery(".project-gallery.project01", "gallery-image-01", 13, "images/Project01", "project01");
-  initGallery(".project-gallery.project02", "gallery-image", 21, "images/Project02", "project02");
-  initGallery(".project-gallery.project05", "gallery-image-05", 20, "images/Project05", "project05");
+  initGallery(".project-gallery.project01", "gallery-image-01", project01Images, "images/Project01");
+  initGallery(".project-gallery.project02", "gallery-image", project02Images, "images/Project02");
+  initGallery(".project-gallery.project05", "gallery-image-05", project05Images, "images/Project05");
 
 });
