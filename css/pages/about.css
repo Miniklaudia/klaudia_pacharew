@@ -28,10 +28,10 @@ ABOUT GRID
 
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.5rem, 4vw, 4rem);
   margin-top: 5rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* ============================
@@ -46,6 +46,7 @@ CONTENT BLOCKS
 }
 
 .about-block.contact {
+  width: min(100%, 520px);
   margin-top: 3rem;
 }
 
@@ -171,7 +172,7 @@ HAMSTER LAYER
   top: 20px;
   right: 20px;
 
-  width: 240px;
+  width: min(240px, calc(100vw - 40px));
   padding: 14px 16px;
 
   font-family: "IBM Plex Mono", monospace;
@@ -226,12 +227,49 @@ HAMSTER LAYER
 }
 
 /* ============================
+HAMSTER ARROW
+============================ */
+
+#hamsterArrow {
+  position: fixed;
+  right: 28px;
+  top: 20%;
+  transform: translateY(-50%);
+  z-index: 5000;
+  pointer-events: none;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+
+  animation: hamsterArrowPulse 1.2s infinite;
+}
+
+@keyframes hamsterArrowPulse {
+  0% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: translateY(-50%) translateX(8px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.35;
+  }
+}
+
+/* ============================
 RESPONSIVE
 ============================ */
 
 @media (max-width: 1200px) {
   .about-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
 
@@ -272,7 +310,8 @@ RESPONSIVE
     font-size: 10px;
   }
 
-  #scrollTopBtn {
+  #scrollTopBtn,
+  #hamsterArrow {
     display: none;
   }
 }
@@ -303,6 +342,10 @@ body.hamster-game-mode {
   overflow: hidden;
 }
 
+body.hamster-game-mode #hamsterArrow {
+  display: none;
+}
+
 .hamster-exit-glitch {
   animation: hamsterScreenGlitch 0.18s infinite;
 }
@@ -311,10 +354,52 @@ body.hamster-game-mode {
   0% {
     filter: none;
   }
+
   50% {
     filter: hue-rotate(40deg) contrast(1.15);
   }
+
   100% {
     filter: none;
+  }
+}
+
+/* FINAL ABOUT PAGE OVERRIDE */
+
+body.about-page main {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 2rem !important;
+}
+
+body.about-page .about-grid {
+  width: 100% !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(220px, 1fr)) !important;
+  gap: clamp(1.5rem, 3vw, 4rem) !important;
+  align-items: start !important;
+}
+
+body.about-page .about-block {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+body.about-page .about-block.contact {
+  width: min(100%, 520px) !important;
+  max-width: 520px !important;
+}
+
+@media (max-width: 1200px) {
+  body.about-page .about-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body.about-page .about-grid {
+    grid-template-columns: 1fr !important;
   }
 }
