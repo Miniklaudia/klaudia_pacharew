@@ -50,6 +50,15 @@ CONTENT BLOCKS
   margin-top: 3rem;
 }
 
+/* Make all visible text areas fill their grid column */
+.about-block h2,
+.about-block p {
+  display: block;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
 /* ============================
 HEADINGS
 ============================ */
@@ -71,6 +80,15 @@ PARAGRAPHS
   overflow-wrap: break-word;
   word-break: break-word;
   font-size: clamp(0.95rem, 1vw, 1.05rem);
+}
+
+/* If another stylesheet creates the dark strips with pseudo-elements,
+   force those strips to fill the same width */
+.about-block h2::before,
+.about-block p::before {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
 }
 
 /* ============================
@@ -364,7 +382,9 @@ body.hamster-game-mode #hamsterArrow {
   }
 }
 
-/* FINAL ABOUT PAGE OVERRIDE */
+/* ============================
+FINAL ABOUT PAGE OVERRIDES
+============================ */
 
 body.about-page main {
   width: 100% !important;
@@ -377,14 +397,30 @@ body.about-page .about-grid {
   width: 100% !important;
   max-width: none !important;
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(220px, 1fr)) !important;
-  gap: clamp(1.5rem, 3vw, 4rem) !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(1.5rem, 2.5vw, 3rem) !important;
   align-items: start !important;
 }
 
 body.about-page .about-block {
   width: 100% !important;
+  min-width: 0 !important;
   max-width: none !important;
+}
+
+body.about-page .about-block h2,
+body.about-page .about-block p {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+body.about-page .about-block h2::before,
+body.about-page .about-block p::before {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
 }
 
 body.about-page .about-block.contact {
@@ -394,12 +430,22 @@ body.about-page .about-block.contact {
 
 @media (max-width: 1200px) {
   body.about-page .about-grid {
-    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
 @media (max-width: 800px) {
+  body.about-page main {
+    padding: 1.5rem !important;
+  }
+
   body.about-page .about-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body.about-page main {
+    padding: 1rem 1rem 150px !important;
   }
 }
