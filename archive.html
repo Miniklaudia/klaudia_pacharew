@@ -2,101 +2,189 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <title>Archive</title>
 
-<link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/base/layout.css">
+
   <link rel="stylesheet" href="css/main.css">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+
+  <!-- Load page-specific CSS after main.css -->
+  <link rel="stylesheet" href="css/pages/archive.css">
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap"
+  >
 </head>
 
 <body class="archive">
 
-  <div class="archive-bg"></div>
-  <div class="puter-glitch-layer"></div>
+  <div class="archive-bg" aria-hidden="true"></div>
+  <div class="puter-glitch-layer" aria-hidden="true"></div>
 
-  <main>
-    <button id="scrollTopBtn">↑ top</button>
+  <main class="archive-main">
 
-    <h1 class="glitch" data-text="Archive">Archive</h1>
+    <button id="scrollTopBtn" type="button">
+      ↑ top
+    </button>
 
-    <p>
-      a partial record.<br>
-      some files are missing.
-    </p>
+    <header class="archive-header">
+      <h1 class="glitch" data-text="Archive">
+        Archive
+      </h1>
 
-    <ul class="archive">
+      <p>
+        a partial record.<br>
+        some files are missing.
+      </p>
+    </header>
+
+    <ul class="archive-list">
+
       <li class="entry">
-        <a href="project01.html" class="file">> project_01.exe — (mis)communication: encounter with the glitch</a>
+        <a href="project01.html" class="file">
+          <span class="file-name">project_01.exe</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            (mis)communication: encounter with the glitch
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project02.html" class="file">> project_02.sys — The Dawn of Generation 404</a>
+        <a href="project02.html" class="file">
+          <span class="file-name">project_02.sys</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            The Dawn of Generation 404
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project03.html" class="file">> project_03.log — We are the Weather</a>
+        <a href="project03.html" class="file">
+          <span class="file-name">project_03.log</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            We are the Weather
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project04.html" class="file">> project_04.bin — Reaction-diffusion</a>
+        <a href="project04.html" class="file">
+          <span class="file-name">project_04.bin</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            Reaction-diffusion
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project05.html" class="file">> project_05.dat — The symphony of zombie media</a>
+        <a href="project05.html" class="file">
+          <span class="file-name">project_05.dat</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            The symphony of zombie media
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project06.html" class="file">> project_06.cfg — Let there be a sun...</a>
+        <a href="project06.html" class="file">
+          <span class="file-name">project_06.cfg</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            Let there be a sun...
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project07.html" class="file">> project_07.ai — Algorithm: Sea of unknown data</a>
+        <a href="project07.html" class="file">
+          <span class="file-name">project_07.ai</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            Algorithm: Sea of unknown data
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="project08.html" class="file">> project_08.lux — Light Feedback</a>
+        <a href="project08.html" class="file">
+          <span class="file-name">project_08.lux</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            Light Feedback
+          </span>
+        </a>
       </li>
+
       <li class="entry">
-        <a href="404.html" class="file">> project_09.tmp — IN PROGRESS</a>
+        <a href="404.html" class="file">
+          <span class="file-name">project_09.tmp</span>
+          <span class="file-separator">—</span>
+          <span class="project-name">
+            IN PROGRESS
+          </span>
+        </a>
       </li>
+
     </ul>
 
-    <nav>
+    <nav class="archive-nav" aria-label="Return navigation">
       <a href="index.html">← return</a>
     </nav>
 
   </main>
 
-  <!-- =========================
-       GLITCH SYSTEM (UPGRADED)
-  ========================== -->
+  <div class="system-status" aria-hidden="true">
+    system status: unstable ▓▒░
+  </div>
+
+  <script src="js/main.js"></script>
+
   <script>
-    const projectLinks = document.querySelectorAll('.archive .file');
+    const projectLinks = document.querySelectorAll(".archive-list .file");
 
-    projectLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-
+    projectLinks.forEach((link) => {
+      link.addEventListener("click", function (event) {
         const chance = Math.random();
 
         // 20% → image-based error page
         if (chance < 0.2) {
-          e.preventDefault();
+          event.preventDefault();
+
           setTimeout(() => {
-            window.location.href = 'error-image.html';
+            window.location.href = "error-image.html";
           }, 150);
+
           return;
         }
 
         // 10% → classic error page
         if (chance < 0.3) {
-          e.preventDefault();
+          event.preventDefault();
+
           setTimeout(() => {
-            window.location.href = 'error.html';
+            window.location.href = "error.html";
           }, 150);
-          return;
         }
 
-        // 70% → normal navigation
+        // Remaining 70% → normal navigation
       });
     });
   </script>
-
-  <div class="system-status">
-    system status: unstable ▓▒░
-  </div>
 
 </body>
 </html>

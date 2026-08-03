@@ -224,3 +224,403 @@ main {
   z-index: 1;
 }
 
+/* =================================
+   ARCHIVE PAGE — RESPONSIVE LAYOUT
+================================= */
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body.archive {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  margin: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.archive *,
+body.archive *::before,
+body.archive *::after {
+  box-sizing: border-box;
+}
+
+/* Main archive container */
+body.archive .archive-main {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 1000px);
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: block;
+
+  margin: 0;
+
+  padding:
+    max(5rem, env(safe-area-inset-top))
+    clamp(1.25rem, 6vw, 3rem)
+    max(5rem, env(safe-area-inset-bottom));
+
+  text-align: left;
+}
+
+/* Prevent global flex-centering from main.css */
+body.archive main {
+  align-items: initial;
+  justify-content: initial;
+}
+
+/* =================================
+   HEADER
+================================= */
+
+body.archive .archive-header {
+  width: min(100%, 680px);
+}
+
+body.archive .archive-header h1 {
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0 0 1rem;
+
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  line-height: 1;
+}
+
+body.archive .archive-header p {
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0;
+
+  font-size: clamp(0.8rem, 2.8vw, 1rem);
+  line-height: 1.65;
+}
+
+/* =================================
+   ARCHIVE LIST
+================================= */
+
+body.archive .archive-list {
+  width: min(100%, 900px);
+
+  margin: clamp(2.5rem, 7vw, 4rem) 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+body.archive .entry {
+  width: 100%;
+  margin: 0 0 0.65rem;
+}
+
+/* =================================
+   ARCHIVE FILE LINKS
+================================= */
+
+body.archive .file {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  /*
+  Arrow, filename, separator, project title.
+  The project title receives the flexible space.
+  */
+  grid-template-columns:
+    auto
+    max-content
+    max-content
+    minmax(0, 1fr);
+
+  align-items: baseline;
+
+  width: 100%;
+  max-width: 100%;
+
+  gap: 0 0.65rem;
+
+  padding: 0.55rem 0.75rem;
+
+  color: #e6d9ff;
+  text-decoration: none;
+
+  opacity: 0.6;
+
+  background: transparent;
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Terminal arrow */
+body.archive .file::before {
+  content: ">";
+
+  position: static;
+
+  grid-column: 1;
+
+  opacity: 0.4;
+}
+
+/* Difference-blend hover layer */
+body.archive .file::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  background: #ff6600;
+  mix-blend-mode: difference;
+
+  opacity: 0;
+
+  transition: opacity 0.15s ease;
+}
+
+/* Filename stays together */
+body.archive .file-name {
+  grid-column: 2;
+
+  white-space: nowrap;
+}
+
+/* Separator */
+body.archive .file-separator {
+  grid-column: 3;
+
+  opacity: 0.55;
+}
+
+/* Project title can wrap */
+body.archive .project-name {
+  grid-column: 4;
+
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Desktop hover */
+body.archive .file:hover {
+  color: #ec2727;
+
+  opacity: 1;
+
+  transform: translateX(6px);
+
+  box-shadow:
+    0 0 10px rgba(255, 0, 255, 0.35),
+    0 0 20px rgba(0, 255, 255, 0.15);
+
+  text-shadow: 0 0 6px rgba(73, 233, 180, 0.6);
+}
+
+body.archive .file:hover::after {
+  opacity: 1;
+}
+
+/* Keyboard navigation */
+body.archive .file:focus-visible {
+  color: #ffffff;
+  opacity: 1;
+
+  outline: 1px solid rgba(0, 217, 255, 0.8);
+  outline-offset: 3px;
+
+  text-shadow: 0 0 6px rgba(0, 217, 255, 0.8);
+}
+
+/* Selected or active link */
+body.archive .file.active {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* =================================
+   RETURN NAVIGATION
+================================= */
+
+body.archive .archive-nav {
+  display: block;
+
+  width: fit-content;
+
+  margin-top: clamp(2.5rem, 7vw, 4rem);
+}
+
+body.archive .archive-nav a {
+  display: inline-block;
+
+  padding: 0.35rem 0.55rem;
+
+  white-space: nowrap;
+}
+
+/* =================================
+   SCROLL BUTTON
+================================= */
+
+body.archive #scrollTopBtn {
+  position: fixed;
+
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 2rem));
+
+  z-index: 100;
+
+  font-size: 0.75rem;
+}
+
+/* =================================
+   SYSTEM STATUS
+================================= */
+
+body.archive .system-status {
+  position: fixed;
+
+  right: max(0.75rem, env(safe-area-inset-right));
+  bottom: max(0.65rem, env(safe-area-inset-bottom));
+
+  z-index: 101;
+
+  max-width: calc(100vw - 1.5rem);
+
+  font-size: clamp(0.5rem, 2vw, 0.7rem);
+
+  white-space: nowrap;
+}
+
+/* =================================
+   TABLET AND MOBILE
+================================= */
+
+@media (max-width: 700px) {
+  body.archive .archive-main {
+    padding-top: max(3.5rem, env(safe-area-inset-top));
+  }
+
+  body.archive .archive-list {
+    margin-top: 2.5rem;
+  }
+
+  body.archive .file {
+    /*
+    On mobile:
+    arrow + filename on the first row,
+    project title underneath.
+    */
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.15rem 0.55rem;
+
+    padding: 0.65rem 0.5rem;
+
+    font-size: clamp(0.78rem, 3.4vw, 0.95rem);
+    line-height: 1.45;
+  }
+
+  body.archive .file::before {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  body.archive .file-name {
+    grid-column: 2;
+    grid-row: 1;
+
+    white-space: normal;
+  }
+
+  body.archive .file-separator {
+    display: none;
+  }
+
+  body.archive .project-name {
+    grid-column: 2;
+    grid-row: 2;
+
+    opacity: 0.78;
+
+    overflow-wrap: break-word;
+  }
+
+  /*
+  Hover transforms can create side overflow on touchscreens.
+  */
+  body.archive .file:hover {
+    transform: none;
+  }
+}
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 420px) {
+  body.archive .archive-main {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+
+  body.archive .archive-header h1 {
+    font-size: clamp(2.1rem, 11vw, 2.8rem);
+  }
+
+  body.archive .archive-header p {
+    font-size: 0.8rem;
+  }
+
+  body.archive .entry {
+    margin-bottom: 0.5rem;
+  }
+
+  body.archive .file {
+    font-size: 0.78rem;
+  }
+
+  body.archive #scrollTopBtn {
+    right: 0.75rem;
+    bottom: 2.5rem;
+
+    padding: 0.4rem 0.65rem;
+  }
+}
+
+/* =================================
+   REDUCED MOTION
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body.archive::before,
+  body.archive::after,
+  body.archive .archive-bg::before,
+  body.archive .archive-bg::after {
+    animation: none;
+  }
+
+  body.archive .file {
+    transition: none;
+  }
+}
