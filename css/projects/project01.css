@@ -7,6 +7,9 @@ html {
   min-height: 100%;
 
   background: #000000;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body.project01 {
@@ -21,6 +24,9 @@ body.project01 {
 
   overflow-x: hidden;
   overflow-y: auto;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body.project01 *,
@@ -66,10 +72,7 @@ body.project01 #video-overlay {
 }
 
 
-/*
-Disable any global body glitch overlays
-that interfere with the Project 1 video.
-*/
+/* Disable global body glitch overlays */
 body.project01::before,
 body.project01::after,
 body.project01 #glitchOverlay {
@@ -102,10 +105,7 @@ body.project01 .project-main {
 }
 
 
-/*
-Override the global centred flex layout
-from main.css.
-*/
+/* Override global flex-centering from main.css */
 body.project01 main {
   align-items: initial;
   justify-content: initial;
@@ -155,7 +155,7 @@ body.project01 .project-title {
 }
 
 
-/* Ensure duplicate glitch text follows title wrapping */
+/* Glitch duplicate title layers */
 body.project01 .project-title::before,
 body.project01 .project-title::after {
   width: 100%;
@@ -295,6 +295,9 @@ body.project01 .gallery-container {
 }
 
 body.project01 .gallery-container img {
+  position: relative;
+  z-index: 6;
+
   display: block;
 
   width: 100%;
@@ -306,6 +309,9 @@ body.project01 .gallery-container img {
   background: rgba(0, 0, 0, 0.25);
 
   border-radius: 6px;
+
+  opacity: 1;
+  visibility: visible;
 }
 
 
@@ -463,20 +469,34 @@ body.project01 #scrollTopBtn:hover {
   }
 
   body.project01 .project-main {
-    padding-top:
-      max(3.5rem, env(safe-area-inset-top));
+    width: 100%;
+    max-width: none;
+
+    padding:
+      max(2.5rem, env(safe-area-inset-top))
+      1.25rem
+      max(4rem, env(safe-area-inset-bottom));
+  }
+
+  body.project01 .project-header,
+  body.project01 .project-text {
+    width: 100%;
+    max-width: none;
   }
 
   body.project01 .project-title {
-    font-size: clamp(1.65rem, 6.5vw, 2.5rem);
-  }
+    width: 100%;
+    max-width: 100%;
 
-  body.project01 .project-text {
-    width: min(100%, 680px);
+    font-size: clamp(1.4rem, 4.8vw, 2rem);
+    line-height: 1.3;
+
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
   body.project01 .gallery-container {
-    width: calc(100% - 5rem);
+    width: 100%;
   }
 }
 
@@ -486,106 +506,157 @@ body.project01 #scrollTopBtn:hover {
 ========================================= */
 
 @media (max-width: 600px) {
-  /*
-  The video remains visible but becomes much
-  quieter behind the text.
-  */
   body.project01 #bg-video {
-    opacity: 0.5;
+    opacity: 0.52;
   }
 
   body.project01 #video-overlay {
-    background: rgba(0, 0, 0, 0.72);
+    background: rgba(0, 0, 0, 0.7);
   }
 
   body.project01 .project-main {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    width: 100%;
+
+    padding:
+      max(2rem, env(safe-area-inset-top))
+      0.9rem
+      max(4rem, env(safe-area-inset-bottom));
   }
 
   body.project01 .project-header {
-    margin-bottom: 2.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
   }
 
   body.project01 .project-title {
     width: 100%;
 
+    margin: 0;
+
     padding: 0.45rem 0.55rem;
 
-    font-size: clamp(1.55rem, 7vw, 2rem);
-    line-height: 1.28;
+    font-size: clamp(1.3rem, 5.7vw, 1.65rem);
+    line-height: 1.35;
+    letter-spacing: 0.01em;
 
     overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  /*
+  The full duplicated title becomes visually
+  oversized after wrapping on mobile.
+  */
+  body.project01 .project-title::before,
+  body.project01 .project-title::after {
+    display: none;
   }
 
   body.project01 #play-sound {
-    margin-top: 0.8rem;
+    margin-top: 0.75rem;
 
-    font-size: 0.78rem;
+    padding: 0.4rem 0.6rem;
+
+    font-size: 0.75rem;
+  }
+
+  body.project01 .project-text {
+    width: 100%;
+    max-width: none;
   }
 
   body.project01 .project-section {
-    margin-bottom: 2.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
   }
 
   body.project01 .project-section h2 {
-    font-size: 1.05rem;
+    margin-bottom: 0.7rem;
+
+    padding: 0.3rem 0.45rem;
+
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
   body.project01 .project-section p {
-    padding: 0.7rem 0.75rem;
+    width: 100%;
+    max-width: none;
 
-    font-size: clamp(0.94rem, 4vw, 1rem);
-    line-height: 1.75;
+    margin-bottom: 0.65rem;
+    padding: 0.55rem 0.6rem;
+
+    background: rgba(0, 0, 0, 0.62);
+
+    font-size: 0.88rem;
+    line-height: 1.65;
+
+    opacity: 0.96;
   }
 
   body.project01 .project-gallery {
     width: 100%;
 
-    margin: 3rem 0;
+    margin: 2.5rem 0;
   }
 
   body.project01 .gallery-container {
     width: 100%;
+    max-width: none;
+
+    margin: 0;
   }
 
   body.project01 .gallery-container img {
+    display: block;
+
     width: 100%;
+    height: auto;
     max-height: none;
 
     object-fit: contain;
   }
 
-  /*
-  Arrows sit over the image instead of outside it.
-  */
   body.project01 .project-gallery .arrow {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.4rem;
+    height: 2.4rem;
 
-    font-size: 1.2rem;
+    padding: 0;
+
+    font-size: 1.1rem;
+
+    background: rgba(0, 0, 0, 0.72);
   }
 
   body.project01 .project-gallery .arrow.left {
-    left: 0.5rem;
+    left: 0.4rem;
   }
 
   body.project01 .project-gallery .arrow.right {
-    right: 0.5rem;
+    right: 0.4rem;
   }
 
   body.project01 .project-nav {
     margin-top: 1rem;
   }
 
+  body.project01 .project-nav a,
+  body.project01 .project-nav a:link,
+  body.project01 .project-nav a:visited {
+    font-size: 0.8rem;
+  }
+
   body.project01 #scrollTopBtn {
-    right: 0.75rem;
+    right: 0.65rem;
+
     bottom: max(
-      0.75rem,
-      calc(env(safe-area-inset-bottom) + 0.5rem)
+      0.65rem,
+      calc(env(safe-area-inset-bottom) + 0.4rem)
     );
 
-    padding: 0.42rem 0.65rem;
+    padding: 0.4rem 0.6rem;
+
+    font-size: 0.65rem;
   }
 }
 
@@ -596,16 +667,33 @@ body.project01 #scrollTopBtn:hover {
 
 @media (max-width: 380px) {
   body.project01 .project-main {
-    padding-left: 0.85rem;
-    padding-right: 0.85rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   body.project01 .project-title {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
   }
 
   body.project01 .project-section p {
-    font-size: 0.92rem;
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+}
+
+
+/* =========================================
+   SHORT LANDSCAPE SCREENS
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body.project01 .project-main {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  body.project01 .project-title {
+    font-size: clamp(1.25rem, 4vw, 1.8rem);
   }
 }
 
