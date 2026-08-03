@@ -1,237 +1,11 @@
-/* =========================
-ARCHIVE FILE LINKS
-========================= */
-
-.file {
-  display: block;
-  position: relative;
-  padding-left: 1.5rem;
-
-  text-decoration: none;
-  color: #e6d9ff; /* lighter pastel lavender */
-  opacity: 0.55;  /* lighter overall presence */
-
-  background: transparent;
-
-  overflow: hidden;
-  z-index: 0;
-
-  transition: opacity 0.2s ease, transform 0.15s ease, color 0.2s ease;
-}
-
-/* DIFFERENCE BLEND HOVER LAYER */
-.file::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background: #ff6600;
-  mix-blend-mode: difference;
-
-  opacity: 0;
-  transition: opacity 0.15s ease;
-
-  z-index: -1;
-}
-
-/* hover state */
-.file:hover {
-  opacity: 1;
-  transform: translateX(6px);
-
-  color: #ec2727;
-
-  border-radius: 4px;
-
-  box-shadow:
-    0 0 10px rgba(255, 0, 255, 0.35),
-    0 0 20px rgba(0, 255, 255, 0.15);
-
-  text-shadow: 0 0 6px rgba(73, 233, 180, 0.6);
-}
-
-/* activate blend overlay */
-.file:hover::after {
-  opacity: 1;
-}
-
-/* active file state */
-.file.active {
-  color: #ffffff;
-  opacity: 1;
-}
-
-/* blinking cursor */
-.file.active::after {
-  content: "_";
-  margin-left: 6px;
-  animation: blink 1s infinite;
-}
-
-/* blinking animation */
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
-}
-
-
-/* =========================
-ARCHIVE BACKGROUND IMAGE
-========================= */
-
-.archive-bg {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-
-  background-image: url("assets/images/ilovemyputer.jpg");
-  background-size: cover;
-  background-position: center;
-
-  opacity: 0.10;
-  filter: contrast(1.2) brightness(0.6) saturate(0.8);
-
-  mix-blend-mode: overlay;
-
-  z-index: -2;
-  pointer-events: none;
-}
-
-/* slice glitch layers */
-.archive-bg::before,
-.archive-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image: url("assets/images/ilovemyputer.jpg");
-  background-size: cover;
-  background-position: center;
-
-  opacity: 0.08;
-  mix-blend-mode: screen;
-}
-
-/* slice glitch 1 */
-.archive-bg::before {
-  animation: archiveSlice1 2.2s infinite linear;
-}
-
-/* slice glitch 2 */
-.archive-bg::after {
-  animation: archiveSlice2 3s infinite linear;
-}
-
-
-/* =========================
-GLITCH LAYERS
-========================= */
-
-body.archive::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(180, 0, 255, 0.18) 0px,
-      rgba(0, 255, 200, 0.12) 2px,
-      transparent 2px,
-      transparent 6px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 0, 120, 0.12) 0px,
-      transparent 3px,
-      transparent 8px
-    );
-
-  mix-blend-mode: screen;
-  z-index: -1;
-
-  animation: archiveScan 0.8s infinite linear;
-}
-
-body.archive::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255, 0, 0, 0.08),
-      rgba(0, 255, 0, 0.08) 2px,
-      rgba(0, 0, 255, 0.08) 4px,
-      transparent 6px
-    );
-
-  mix-blend-mode: screen;
-  z-index: -1;
-
-  animation: archiveRGBShift 1.5s infinite alternate;
-}
-
-
-/* =========================
-ANIMATIONS
-========================= */
-
-@keyframes archiveScan {
-  0%   { transform: translateX(0) skewX(0deg); }
-  25%  { transform: translateX(4px) skewX(2deg); }
-  50%  { transform: translateX(-3px) skewX(-2deg); }
-  75%  { transform: translateX(2px) skewX(1deg); }
-  100% { transform: translateX(0) skewX(0deg); }
-}
-
-@keyframes archiveRGBShift {
-  0%   { transform: translate(0,0); }
-  25%  { transform: translate(-4px, 2px); }
-  50%  { transform: translate(3px, -2px); }
-  75%  { transform: translate(-2px, -1px); }
-  100% { transform: translate(2px, 1px); }
-}
-
-@keyframes archiveSlice1 {
-  0%   { clip-path: inset(0 0 85% 0); transform: translateX(-3px); }
-  20%  { clip-path: inset(20% 0 60% 0); transform: translateX(4px); }
-  40%  { clip-path: inset(45% 0 35% 0); transform: translateX(-5px); }
-  60%  { clip-path: inset(70% 0 10% 0); transform: translateX(3px); }
-  80%  { clip-path: inset(10% 0 75% 0); transform: translateX(-4px); }
-  100% { clip-path: inset(0 0 85% 0); transform: translateX(0); }
-}
-
-@keyframes archiveSlice2 {
-  0%   { clip-path: inset(80% 0 0 0); transform: translateX(3px); }
-  25%  { clip-path: inset(30% 0 40% 0); transform: translateX(-3px); }
-  50%  { clip-path: inset(55% 0 25% 0); transform: translateX(5px); }
-  75%  { clip-path: inset(15% 0 65% 0); transform: translateX(-4px); }
-  100% { clip-path: inset(80% 0 0 0); transform: translateX(2px); }
-}
-
-
-/* =========================
-LAYOUT LAYERING
-========================= */
-
-main {
-  position: relative;
-  z-index: 1;
-}
-
-/* =================================
-   ARCHIVE PAGE — RESPONSIVE LAYOUT
-================================= */
+/* =========================================
+   ARCHIVE PAGE
+========================================= */
 
 html {
   width: 100%;
   min-height: 100%;
-  background: var(--bg);
+  background: var(--bg, #050505);
 }
 
 body.archive {
@@ -240,6 +14,9 @@ body.archive {
   min-height: 100svh;
 
   margin: 0;
+
+  background: var(--bg, #050505);
+  color: var(--fg, #e6e6e6);
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -251,36 +28,162 @@ body.archive *::after {
   box-sizing: border-box;
 }
 
-/* Main archive container */
+
+/* =========================================
+   ARCHIVE BACKGROUND IMAGE
+========================================= */
+
+body.archive .archive-bg {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  /*
+  archive.css is inside css/pages/,
+  so ../../ reaches the website root.
+  */
+  background-image: url("../../assets/images/ilovemyputer.jpg");
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.1;
+
+  filter:
+    contrast(1.2)
+    brightness(0.6)
+    saturate(0.8);
+
+  mix-blend-mode: overlay;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+body.archive .archive-bg::before,
+body.archive .archive-bg::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../../assets/images/ilovemyputer.jpg");
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.08;
+  mix-blend-mode: screen;
+
+  pointer-events: none;
+}
+
+body.archive .archive-bg::before {
+  animation: archiveSlice1 2.2s infinite linear;
+}
+
+body.archive .archive-bg::after {
+  animation: archiveSlice2 3s infinite linear;
+}
+
+
+/* =========================================
+   GLOBAL ARCHIVE GLITCH LAYERS
+========================================= */
+
+body.archive::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(180, 0, 255, 0.18) 0,
+      rgba(0, 255, 200, 0.12) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 0, 120, 0.12) 0,
+      transparent 3px,
+      transparent 8px
+    );
+
+  mix-blend-mode: screen;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: archiveScan 0.8s infinite linear;
+}
+
+body.archive::after {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 0, 0, 0.08),
+      rgba(0, 255, 0, 0.08) 2px,
+      rgba(0, 0, 255, 0.08) 4px,
+      transparent 6px
+    );
+
+  mix-blend-mode: screen;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: archiveRGBShift 1.5s infinite alternate;
+}
+
+
+/* =========================================
+   MAIN ARCHIVE LAYOUT
+========================================= */
+
 body.archive .archive-main {
   position: relative;
   z-index: 2;
 
-  width: min(100%, 1000px);
+  display: block;
+
+  width: min(100%, 1100px);
   min-height: 100vh;
   min-height: 100svh;
-
-  display: block;
 
   margin: 0;
 
   padding:
-    max(5rem, env(safe-area-inset-top))
-    clamp(1.25rem, 6vw, 3rem)
+    max(4rem, env(safe-area-inset-top))
+    clamp(1.25rem, 5vw, 3rem)
     max(5rem, env(safe-area-inset-bottom));
 
   text-align: left;
 }
 
-/* Prevent global flex-centering from main.css */
+/*
+Overrides any global flex layout applied
+to main inside main.css.
+*/
 body.archive main {
   align-items: initial;
   justify-content: initial;
 }
 
-/* =================================
-   HEADER
-================================= */
+
+/* =========================================
+   ARCHIVE HEADER
+========================================= */
 
 body.archive .archive-header {
   width: min(100%, 680px);
@@ -290,9 +193,9 @@ body.archive .archive-header h1 {
   width: fit-content;
   max-width: 100%;
 
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
 
-  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  font-size: clamp(2.5rem, 7vw, 4rem);
   line-height: 1;
 }
 
@@ -302,18 +205,21 @@ body.archive .archive-header p {
 
   margin: 0;
 
-  font-size: clamp(0.8rem, 2.8vw, 1rem);
-  line-height: 1.65;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  line-height: 1.7;
+
+  opacity: 0.8;
 }
 
-/* =================================
+
+/* =========================================
    ARCHIVE LIST
-================================= */
+========================================= */
 
 body.archive .archive-list {
-  width: min(100%, 900px);
+  width: min(100%, 1000px);
 
-  margin: clamp(2.5rem, 7vw, 4rem) 0 0;
+  margin: clamp(2.75rem, 6vw, 4.5rem) 0 0;
   padding: 0;
 
   list-style: none;
@@ -321,182 +227,290 @@ body.archive .archive-list {
 
 body.archive .entry {
   width: 100%;
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.6rem;
 }
 
-/* =================================
-   ARCHIVE FILE LINKS
-================================= */
 
-body.archive .file {
+/* =========================================
+   ARCHIVE FILE LINKS — DESKTOP
+========================================= */
+
+body.archive .archive-list .file,
+body.archive .archive-list .file:link,
+body.archive .archive-list .file:visited {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 
-  display: grid;
-
-  /*
-  Arrow, filename, separator, project title.
-  The project title receives the flexible space.
-  */
-  grid-template-columns:
-    auto
-    max-content
-    max-content
-    minmax(0, 1fr);
-
+  display: flex;
   align-items: baseline;
 
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
 
-  gap: 0 0.65rem;
+  gap: 0.65rem;
 
-  padding: 0.55rem 0.75rem;
-
-  color: #e6d9ff;
-  text-decoration: none;
-
-  opacity: 0.6;
+  padding: 0.38rem 0.5rem;
 
   background: transparent;
+  color: #ff39ff;
+
+  border: 0;
   border-radius: 4px;
 
-  overflow: hidden;
+  box-shadow: none;
+  text-shadow: none;
+
+  text-decoration: none;
+
+  opacity: 0.72;
+
+  overflow: visible;
+
+  transform: none;
 
   transition:
+    color 0.2s ease,
     opacity 0.2s ease,
     transform 0.15s ease,
-    color 0.2s ease,
     background 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
+
 /* Terminal arrow */
-body.archive .file::before {
+body.archive .archive-list .file::before {
   content: ">";
 
   position: static;
 
-  grid-column: 1;
+  flex: 0 0 auto;
 
-  opacity: 0.4;
+  color: #ff39ff;
+
+  opacity: 0.55;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Difference-blend hover layer */
-body.archive .file::after {
-  content: "";
 
-  position: absolute;
-  inset: 0;
+/*
+Explicitly remove conflicting ::after effects
+from main.css.
+*/
+body.archive .archive-list .file::after {
+  content: none;
 
-  z-index: -1;
+  display: none;
 
-  background: #1febad;
-  mix-blend-mode: difference;
+  background: none;
+  mix-blend-mode: normal;
 
   opacity: 0;
-
-  transition: opacity 0.15s ease;
 }
 
-/* Filename stays together */
+
+/* Filename */
 body.archive .file-name {
-  grid-column: 2;
+  display: inline;
+
+  flex: 0 0 auto;
 
   white-space: nowrap;
 }
 
-/* Separator */
-body.archive .file-separator {
-  grid-column: 3;
 
-  opacity: 0.55;
+/* Dash */
+body.archive .file-separator {
+  display: inline;
+
+  flex: 0 0 auto;
+
+  white-space: nowrap;
+
+  opacity: 0.6;
 }
 
-/* Project title can wrap */
+
+/* Project title */
 body.archive .project-name {
-  grid-column: 4;
+  display: inline;
 
   min-width: 0;
 
-  overflow-wrap: anywhere;
+  flex: 0 1 auto;
+
+  white-space: nowrap;
+
+  overflow-wrap: normal;
   word-break: normal;
 }
 
-/* Desktop hover */
-body.archive .file:hover {
-  color: #eca727;
 
-  opacity: 1;
+/* =========================================
+   DESKTOP HOVER
+========================================= */
 
-  transform: translateX(6px);
+@media (hover: hover) and (pointer: fine) {
+  body.archive .archive-list .file:hover {
+    color: #ff4de1;
 
-  box-shadow:
-    0 0 10px rgba(255, 0, 255, 0.35),
-    0 0 20px rgba(0, 255, 255, 0.15);
+    opacity: 1;
 
-  text-shadow: 0 0 6px rgba(73, 233, 180, 0.6);
+    background: rgba(255, 0, 204, 0.08);
+
+    transform: translateX(6px);
+
+    box-shadow:
+      0 0 10px rgba(255, 0, 204, 0.2),
+      0 0 22px rgba(0, 255, 255, 0.08);
+
+    text-shadow:
+      0 0 5px rgba(255, 57, 255, 0.75);
+  }
+
+  body.archive .archive-list .file:hover::before {
+    color: #00ffff;
+
+    opacity: 1;
+
+    transform: translateX(2px);
+  }
 }
 
-body.archive .file:hover::after {
-  opacity: 1;
-}
 
-/* Keyboard navigation */
-body.archive .file:focus-visible {
+/* =========================================
+   ACTIVE AND KEYBOARD STATES
+========================================= */
+
+body.archive .archive-list .file:active {
   color: #ffffff;
+
   opacity: 1;
 
-  outline: 1px solid rgba(0, 217, 255, 0.8);
+  transform: translateX(4px) scale(0.99);
+}
+
+body.archive .archive-list .file:focus-visible {
+  color: #ffffff;
+
+  opacity: 1;
+
+  outline: 1px solid #00ffff;
   outline-offset: 3px;
 
-  text-shadow: 0 0 6px rgba(0, 217, 255, 0.8);
+  text-shadow:
+    0 0 6px rgba(0, 255, 255, 0.8);
 }
 
-/* Selected or active link */
-body.archive .file.active {
+body.archive .archive-list .file.active {
   color: #ffffff;
+
   opacity: 1;
 }
 
-/* =================================
+
+/* =========================================
    RETURN NAVIGATION
-================================= */
+========================================= */
 
 body.archive .archive-nav {
   display: block;
 
   width: fit-content;
 
-  margin-top: clamp(2.5rem, 7vw, 4rem);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
 }
 
-body.archive .archive-nav a {
+body.archive .archive-nav a,
+body.archive .archive-nav a:link,
+body.archive .archive-nav a:visited {
   display: inline-block;
+
+  width: fit-content;
 
   padding: 0.35rem 0.55rem;
 
+  color: var(--fg, #e6e6e6);
+
+  text-decoration: none;
+
   white-space: nowrap;
+
+  opacity: 0.6;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* =================================
-   SCROLL BUTTON
-================================= */
+body.archive .archive-nav a:hover {
+  color: #00ffff;
+
+  opacity: 1;
+
+  transform: translateX(-3px);
+}
+
+body.archive .archive-nav a:focus-visible {
+  color: #ffffff;
+
+  opacity: 1;
+
+  outline: 1px solid #00ffff;
+  outline-offset: 3px;
+}
+
+
+/* =========================================
+   SCROLL-TO-TOP BUTTON
+========================================= */
 
 body.archive #scrollTopBtn {
   position: fixed;
 
   right: max(1rem, env(safe-area-inset-right));
-  bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 2rem));
+  bottom: max(
+    2.5rem,
+    calc(env(safe-area-inset-bottom) + 2rem)
+  );
 
   z-index: 100;
 
-  font-size: 0.75rem;
+  padding: 0.5rem 0.8rem;
+
+  background: #ff00cc;
+  color: #050505;
+
+  border: 0;
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 0.72rem;
+
+  cursor: pointer;
+
+  opacity: 0.82;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* =================================
+body.archive #scrollTopBtn:hover {
+  opacity: 1;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
    SYSTEM STATUS
-================================= */
+========================================= */
 
 body.archive .system-status {
   position: fixed;
@@ -508,42 +522,62 @@ body.archive .system-status {
 
   max-width: calc(100vw - 1.5rem);
 
-  font-size: clamp(0.5rem, 2vw, 0.7rem);
+  font-size: clamp(0.5rem, 1.5vw, 0.7rem);
+
+  letter-spacing: 0.05em;
 
   white-space: nowrap;
+
+  opacity: 0.35;
+
+  pointer-events: none;
 }
 
-/* =================================
+
+/* =========================================
    TABLET AND MOBILE
-================================= */
+========================================= */
 
 @media (max-width: 700px) {
   body.archive .archive-main {
-    padding-top: max(3.5rem, env(safe-area-inset-top));
+    padding-top:
+      max(3.5rem, env(safe-area-inset-top));
   }
 
   body.archive .archive-list {
     margin-top: 2.5rem;
   }
 
-  body.archive .file {
-    /*
-    On mobile:
-    arrow + filename on the first row,
-    project title underneath.
-    */
-    grid-template-columns: auto minmax(0, 1fr);
+  body.archive .entry {
+    margin-bottom: 0.5rem;
+  }
+
+  body.archive .archive-list .file,
+  body.archive .archive-list .file:link,
+  body.archive .archive-list .file:visited {
+    display: grid;
+
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+
+    width: 100%;
+
     gap: 0.15rem 0.55rem;
 
     padding: 0.65rem 0.5rem;
 
     font-size: clamp(0.78rem, 3.4vw, 0.95rem);
     line-height: 1.45;
+
+    opacity: 0.78;
   }
 
-  body.archive .file::before {
+  body.archive .archive-list .file::before {
     grid-column: 1;
     grid-row: 1;
+
+    align-self: baseline;
   }
 
   body.archive .file-name {
@@ -561,22 +595,28 @@ body.archive .system-status {
     grid-column: 2;
     grid-row: 2;
 
-    opacity: 0.78;
+    white-space: normal;
 
     overflow-wrap: break-word;
+    word-break: normal;
+
+    opacity: 0.82;
   }
 
-  /*
-  Hover transforms can create side overflow on touchscreens.
-  */
-  body.archive .file:hover {
+  body.archive .archive-list .file:hover,
+  body.archive .archive-list .file:active {
     transform: none;
+  }
+
+  body.archive .archive-list .file:hover {
+    background: rgba(255, 0, 204, 0.05);
   }
 }
 
-/* =================================
+
+/* =========================================
    SMALL MOBILE
-================================= */
+========================================= */
 
 @media (max-width: 420px) {
   body.archive .archive-main {
@@ -585,18 +625,16 @@ body.archive .system-status {
   }
 
   body.archive .archive-header h1 {
-    font-size: clamp(2.1rem, 11vw, 2.8rem);
+    font-size: clamp(2.15rem, 11vw, 2.9rem);
   }
 
   body.archive .archive-header p {
     font-size: 0.8rem;
   }
 
-  body.archive .entry {
-    margin-bottom: 0.5rem;
-  }
-
-  body.archive .file {
+  body.archive .archive-list .file,
+  body.archive .archive-list .file:link,
+  body.archive .archive-list .file:visited {
     font-size: 0.78rem;
   }
 
@@ -608,9 +646,130 @@ body.archive .system-status {
   }
 }
 
-/* =================================
+
+/* =========================================
+   SHORT LANDSCAPE SCREENS
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body.archive .archive-main {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+}
+
+
+/* =========================================
+   GLITCH ANIMATIONS
+========================================= */
+
+@keyframes archiveScan {
+  0% {
+    transform: translateX(0) skewX(0deg);
+  }
+
+  25% {
+    transform: translateX(4px) skewX(2deg);
+  }
+
+  50% {
+    transform: translateX(-3px) skewX(-2deg);
+  }
+
+  75% {
+    transform: translateX(2px) skewX(1deg);
+  }
+
+  100% {
+    transform: translateX(0) skewX(0deg);
+  }
+}
+
+@keyframes archiveRGBShift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-4px, 2px);
+  }
+
+  50% {
+    transform: translate(3px, -2px);
+  }
+
+  75% {
+    transform: translate(-2px, -1px);
+  }
+
+  100% {
+    transform: translate(2px, 1px);
+  }
+}
+
+@keyframes archiveSlice1 {
+  0% {
+    clip-path: inset(0 0 85% 0);
+    transform: translateX(-3px);
+  }
+
+  20% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translateX(4px);
+  }
+
+  40% {
+    clip-path: inset(45% 0 35% 0);
+    transform: translateX(-5px);
+  }
+
+  60% {
+    clip-path: inset(70% 0 10% 0);
+    transform: translateX(3px);
+  }
+
+  80% {
+    clip-path: inset(10% 0 75% 0);
+    transform: translateX(-4px);
+  }
+
+  100% {
+    clip-path: inset(0 0 85% 0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes archiveSlice2 {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translateX(3px);
+  }
+
+  25% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translateX(-3px);
+  }
+
+  50% {
+    clip-path: inset(55% 0 25% 0);
+    transform: translateX(5px);
+  }
+
+  75% {
+    clip-path: inset(15% 0 65% 0);
+    transform: translateX(-4px);
+  }
+
+  100% {
+    clip-path: inset(80% 0 0 0);
+    transform: translateX(2px);
+  }
+}
+
+
+/* =========================================
    REDUCED MOTION
-================================= */
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
   body.archive::before,
@@ -620,7 +779,10 @@ body.archive .system-status {
     animation: none;
   }
 
-  body.archive .file {
+  body.archive .archive-list .file,
+  body.archive .archive-list .file::before,
+  body.archive .archive-nav a,
+  body.archive #scrollTopBtn {
     transition: none;
   }
 }
