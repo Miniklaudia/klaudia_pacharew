@@ -19,3 +19,181 @@ body.home::before {
   50% { transform: translateY(-3px); }
   100% { transform: translateY(0); }
 }
+
+/* =================================
+   HOME PAGE — RESPONSIVE LAYOUT
+================================= */
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body.home {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/*
+Prevents padding from increasing the width of elements
+beyond the mobile viewport.
+*/
+body.home *,
+body.home *::before,
+body.home *::after {
+  box-sizing: border-box;
+}
+
+/* Main homepage positioning */
+body.home .home-main {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding:
+    max(2rem, env(safe-area-inset-top))
+    clamp(1.25rem, 6vw, 3rem)
+    max(3.5rem, env(safe-area-inset-bottom));
+
+  text-align: left;
+}
+
+/* Main title */
+body.home .home-main .glitch {
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0 0 1.25rem;
+
+  font-size: clamp(2rem, 8vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: 0.025em;
+
+  white-space: nowrap;
+}
+
+/*
+Keeps the glitch copies aligned with the title.
+*/
+body.home .home-main .glitch::before,
+body.home .home-main .glitch::after {
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* Intro copy */
+body.home .home-intro {
+  width: fit-content;
+  max-width: min(100%, 40ch);
+
+  margin: 0;
+
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  line-height: 1.65;
+}
+
+/* Navigation */
+body.home .home-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  width: 100%;
+  margin-top: 2rem;
+  gap: 0.75rem clamp(1.25rem, 6vw, 2.5rem);
+}
+
+body.home .home-nav a {
+  display: inline-block;
+  flex: 0 0 auto;
+
+  font-size: clamp(0.85rem, 3.5vw, 1rem);
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+/* Bottom-right status */
+body.home .system-status {
+  position: fixed;
+  right: max(0.75rem, env(safe-area-inset-right));
+  bottom: max(0.65rem, env(safe-area-inset-bottom));
+
+  z-index: 3;
+
+  max-width: calc(100vw - 1.5rem);
+  font-size: clamp(0.5rem, 2vw, 0.7rem);
+  white-space: nowrap;
+}
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 480px) {
+  body.home .home-main {
+    justify-content: center;
+
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+  }
+
+  body.home .home-main .glitch {
+    font-size: clamp(1.8rem, 9vw, 2.7rem);
+    letter-spacing: 0;
+  }
+
+  body.home .home-intro {
+    font-size: 0.82rem;
+  }
+
+  body.home .home-nav {
+    gap: 0.65rem 1.5rem;
+  }
+}
+
+/* =================================
+   VERY SMALL MOBILE
+================================= */
+
+@media (max-width: 350px) {
+  body.home .home-main .glitch {
+    font-size: 1.65rem;
+  }
+
+  body.home .home-nav {
+    gap: 0.6rem 1rem;
+  }
+}
+
+/* =================================
+   SHORT LANDSCAPE SCREENS
+================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body.home .home-main {
+    justify-content: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  body.home .home-main .glitch {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+  }
+
+  body.home .home-nav {
+    margin-top: 1.25rem;
+  }
+}

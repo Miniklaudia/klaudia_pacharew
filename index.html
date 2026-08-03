@@ -2,39 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <title>unstable archive</title>
 
- <link rel="stylesheet" href="css/base/reset.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/base/reset.css">
   <link rel="stylesheet" href="css/base/variables.css">
-<link rel="stylesheet" href="css/base/typography.css">
-<link rel="stylesheet" href="css/base/layout.css">
-<link rel="stylesheet" href="css/pages/home.css">
-<link rel="stylesheet" href="css/effects/glitch-text.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/base/layout.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/effects/glitch-text.css">
 
-
-  <link href="https://fonts.googleapis.com/css2?familyIBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap"
+  >
 </head>
 
 <body class="home">
-    
-  <main>
-    <h1 class="glitch" data-text="unstable archive">unstable archive</h1>
-    <p>
 
-      this interface is under construction by Klaudia Pacharew.<br>
-      
+  <main class="home-main">
+    <h1 class="glitch" data-text="unstable archive">
+      unstable archive
+    </h1>
+
+    <p class="home-intro">
+      this interface is under construction<br>
+      by Klaudia Pacharew.
     </p>
-    <nav>
-        <a href="archive.html">archive</a>
-        <a href="research.html">research</a>
-        <a href="about.html">about</a>
-      </nav>
+
+    <nav class="home-nav" aria-label="Main navigation">
+      <a href="archive.html">archive</a>
+      <a href="research.html">research</a>
+      <a href="about.html">about</a>
+    </nav>
   </main>
 
+  <div class="system-status" aria-hidden="true">
+    system status: unstable ▓▒░
+  </div>
+
   <script src="js/main.js"></script>
-  <div class="system-status">
-system status: unstable ▓▒░
-</div>
 </body>
 </html>
