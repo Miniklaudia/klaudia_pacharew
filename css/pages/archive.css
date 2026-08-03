@@ -391,7 +391,7 @@ body.archive .file::after {
 
   z-index: -1;
 
-  background: #ff6600;
+  background: #1febad;
   mix-blend-mode: difference;
 
   opacity: 0;
@@ -425,7 +425,7 @@ body.archive .project-name {
 
 /* Desktop hover */
 body.archive .file:hover {
-  color: #ec2727;
+  color: #eca727;
 
   opacity: 1;
 

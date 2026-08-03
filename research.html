@@ -1,141 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>research</title>
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="css/base/reset.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/pages/research.css">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
+  <title>research</title>
 
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/base/layout.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages/research.css">
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&display=swap"
+  >
 </head>
 
 <body class="research">
 
-<main>
+  <main class="research-main">
 
-<h1 class="glitch">research</h1>
+    <header class="research-header">
+      <h1 class="glitch" data-text="research">
+        research
+      </h1>
 
-<p class="subtitle">
-This page contains my academic reflections, methodology notes, and theoretical frameworks. Click a folder to explore files and documents.
-</p>
+      <p class="subtitle">
+        This page contains my academic reflections, methodology notes, and
+        theoretical frameworks. Click a folder to explore files and documents.
+      </p>
+    </header>
 
-<div class="folder-grid">
+    <section class="folder-grid" aria-label="Research folders">
 
-  <div class="folder" data-folder="Essays">
-    <img class="folder-preview" src="" data-img="essays.JPG">
-    <div class="folder-name">Essays</div>
+      <button
+        class="folder"
+        type="button"
+        data-folder="Essays"
+        aria-haspopup="dialog"
+      >
+        <img
+          class="folder-preview"
+          src=""
+          data-img="essays.JPG"
+          alt=""
+        >
+        <span class="folder-name">Essays</span>
+      </button>
+
+      <button
+        class="folder"
+        type="button"
+        data-folder="Project Development"
+        aria-haspopup="dialog"
+      >
+        <img
+          class="folder-preview"
+          src=""
+          data-img="development.png"
+          alt=""
+        >
+        <span class="folder-name">Project Development</span>
+      </button>
+
+      <button
+        class="folder"
+        type="button"
+        data-folder="Future works"
+        aria-haspopup="dialog"
+      >
+        <img
+          class="folder-preview"
+          src=""
+          data-img="future.png"
+          alt=""
+        >
+        <span class="folder-name">Future works</span>
+      </button>
+
+      <button
+        class="folder"
+        type="button"
+        data-folder="Workshops and Lectures"
+        aria-haspopup="dialog"
+      >
+        <img
+          class="folder-preview"
+          src=""
+          data-img="workshops.png"
+          alt=""
+        >
+        <span class="folder-name">Workshops &amp; Lectures</span>
+      </button>
+
+    </section>
+
+    <nav class="research-nav" aria-label="Main navigation">
+      <a href="index.html">home</a>
+      <a href="archive.html">archive</a>
+    </nav>
+
+  </main>
+
+  <div
+    class="popup-overlay"
+    id="popup"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="title"
+    aria-hidden="true"
+  >
+    <div class="popup-content">
+
+      <button
+        class="popup-close"
+        id="close"
+        type="button"
+        aria-label="Close folder"
+      >
+        &times;
+      </button>
+
+      <h2 id="title"></h2>
+
+      <ul class="file-list" id="list"></ul>
+    </div>
   </div>
 
-  <div class="folder" data-folder="Project Development">
-    <img class="folder-preview" src="" data-img="development.png">
-    <div class="folder-name">Project Development</div>
+  <div class="system-status" aria-hidden="true">
+    system status: unstable ▓▒░
   </div>
 
-  <div class="folder" data-folder="Future works">
-    <img class="folder-preview" src="" data-img="future.png">
-    <div class="folder-name">Future works</div>
-  </div>
+  <script>
+    /* =========================
+       R2 BASES
+    ========================= */
 
-  <div class="folder" data-folder="Workshops and Lectures">
-    <img class="folder-preview" src="" data-img="workshops.png">
-    <div class="folder-name">Workshops & Lectures</div>
-  </div>
+    const IMG_BASE =
+      "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/research/";
 
-</div>
+    const DOC_BASE =
+      "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/research/";
 
-<div class="popup-overlay" id="popup">
-  <div class="popup-content">
-    <div class="popup-close" id="close">&times;</div>
-    <h2 id="title"></h2>
-    <ul class="file-list" id="list"></ul>
-  </div>
-</div>
+    /* =========================
+       FOLDER IMAGES
+    ========================= */
 
-<nav>
-  <a href="index.html">home</a>
-  <a href="archive.html">archive</a>
-</nav>
-
-</main>
-
-<script>
-/* =========================
-R2 BASES
-========================= */
-const IMG_BASE = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/images/research/";
-const DOC_BASE = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev/research/";
-
-/* =========================
-FOLDER IMAGES
-========================= */
-document.querySelectorAll(".folder-preview").forEach(img => {
-  img.src = IMG_BASE + img.dataset.img;
-});
-
-/* =========================
-FILES
-========================= */
-const folders = document.querySelectorAll(".folder");
-const popup = document.getElementById("popup");
-const title = document.getElementById("title");
-const list = document.getElementById("list");
-const close = document.getElementById("close");
-
-const folderFiles = {
-  "Essays": [
-    "History of Sublime.pdf",
-    "The Politics of Glitch.pdf",
-    "What do you envision a 'technological sublime' to be_.pdf"
-  ],
-  "Project Development": [
-    "project 01 (mis)communication encounter with the glitch - Documentation Log.pdf",
-    "project 02 The Dawn of Generation 404 - Documentation Log.pdf",
-    "project_03 We are the Weather - Documentation Log.pdf"
-  ],
-  "Future works": [
-    "Elf.png"
-  ],
-  "Workshops and Lectures": [
-    "TouchDesigner Workshop Notes.pdf",
-    "TouchDesigner Workshop.pdf",
-    "Postinternet debate.mp4"
-  ]
-};
-
-folders.forEach(folder => {
-  folder.addEventListener("click", () => {
-
-    const key = folder.dataset.folder;
-    title.textContent = key;
-    list.innerHTML = "";
-
-    (folderFiles[key] || []).forEach(file => {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-
-      a.textContent = file;
-
-      // IMPORTANT: documents come from personalwebsite bucket
-      a.href = DOC_BASE + encodeURIComponent(key) + "/" + encodeURIComponent(file);
-
-      a.target = "_blank";
-
-      li.appendChild(a);
-      list.appendChild(li);
+    document.querySelectorAll(".folder-preview").forEach((img) => {
+      img.src = IMG_BASE + img.dataset.img;
     });
 
-    popup.style.display = "flex";
-  });
-});
+    /* =========================
+       FILE DATA
+    ========================= */
 
-close.onclick = () => popup.style.display = "none";
-popup.onclick = (e) => {
-  if (e.target === popup) popup.style.display = "none";
-};
-</script>
+    const folderFiles = {
+      "Essays": [
+        "History of Sublime.pdf",
+        "The Politics of Glitch.pdf",
+        "What do you envision a 'technological sublime' to be_.pdf"
+      ],
+
+      "Project Development": [
+        "project 01 (mis)communication encounter with the glitch - Documentation Log.pdf",
+        "project 02 The Dawn of Generation 404 - Documentation Log.pdf",
+        "project_03 We are the Weather - Documentation Log.pdf"
+      ],
+
+      "Future works": [
+        "Elf.png"
+      ],
+
+      "Workshops and Lectures": [
+        "TouchDesigner Workshop Notes.pdf",
+        "TouchDesigner Workshop.pdf",
+        "Postinternet debate.mp4"
+      ]
+    };
+
+    /* =========================
+       POPUP
+    ========================= */
+
+    const folders = document.querySelectorAll(".folder");
+    const popup = document.getElementById("popup");
+    const popupTitle = document.getElementById("title");
+    const list = document.getElementById("list");
+    const closeButton = document.getElementById("close");
+
+    let lastFocusedFolder = null;
+
+    function openFolder(folder) {
+      const key = folder.dataset.folder;
+
+      lastFocusedFolder = folder;
+      popupTitle.textContent = key;
+      list.innerHTML = "";
+
+      (folderFiles[key] || []).forEach((file) => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+
+        link.textContent = file;
+        link.href =
+          DOC_BASE +
+          encodeURIComponent(key) +
+          "/" +
+          encodeURIComponent(file);
+
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+
+      popup.classList.add("is-open");
+      popup.setAttribute("aria-hidden", "false");
+      document.body.classList.add("popup-open");
+
+      closeButton.focus();
+    }
+
+    function closePopup() {
+      popup.classList.remove("is-open");
+      popup.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("popup-open");
+
+      if (lastFocusedFolder) {
+        lastFocusedFolder.focus();
+      }
+    }
+
+    folders.forEach((folder) => {
+      folder.addEventListener("click", () => {
+        openFolder(folder);
+      });
+    });
+
+    closeButton.addEventListener("click", closePopup);
+
+    popup.addEventListener("click", (event) => {
+      if (event.target === popup) {
+        closePopup();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && popup.classList.contains("is-open")) {
+        closePopup();
+      }
+    });
+  </script>
 
 </body>
 </html>
