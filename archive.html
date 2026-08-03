@@ -185,6 +185,23 @@
       });
     });
   </script>
+  <script>
+  document.querySelectorAll(".archive-list .file").forEach((link) => {
+    /*
+    Stops hover and mouse-movement events from reaching
+    older global glitch scripts attached higher up.
+    */
+    ["mouseenter", "mouseover", "mousemove", "mouseleave"].forEach((eventName) => {
+      link.addEventListener(
+        eventName,
+        (event) => {
+          event.stopImmediatePropagation();
+        },
+        true
+      );
+    });
+  });
+</script>
 
 </body>
 </html>
