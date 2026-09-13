@@ -162,7 +162,7 @@
         const chance = Math.random();
 
         // 20% → image-based error page
-        if (chance < 0.2) {
+        if (chance < 0.01) {
           event.preventDefault();
 
           setTimeout(() => {
@@ -173,13 +173,13 @@
         }
 
         // 10% → classic error page
-        if (chance < 0.3) {
-          event.preventDefault();
+        //if (chance < 0.01) {
+        //  event.preventDefault();
 
-          setTimeout(() => {
-            window.location.href = "error.html";
-          }, 150);
-        }
+         // setTimeout(() => {
+         //   window.location.href = "error.html";
+         // }, 150);
+        //}
 
         // Remaining 70% → normal navigation
       });
