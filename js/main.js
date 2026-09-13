@@ -6,21 +6,42 @@ const R2 = "https://pub-e3bf6ce01e0948019faa273c5ebc10ba.r2.dev";
 
 // ===== ASCII GLITCH FUNCTION =====
 function glitchText(element) {
-  const originalText = element.innerText;
-  let glitchedText = "";
+  const textNodes = [];
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
 
-  for (let char of originalText) {
-    if (Math.random() < 0.12 && char !== " ") {
-      glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-    } else {
-      glitchedText += char;
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement && node.parentElement.closest("a")) {
+      continue;
     }
+    textNodes.push(node);
   }
 
-  element.innerText = glitchedText;
+  if (!textNodes.length) return;
+
+  const originalValues = textNodes.map(node => ({
+    node,
+    originalText: node.textContent
+  }));
+
+  originalValues.forEach(({ node, originalText }) => {
+    let glitchedText = "";
+
+    for (let char of originalText) {
+      if (Math.random() < 0.12 && char !== " ") {
+        glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+      } else {
+        glitchedText += char;
+      }
+    }
+
+    node.textContent = glitchedText;
+  });
 
   setTimeout(() => {
-    element.innerText = originalText;
+    originalValues.forEach(({ node, originalText }) => {
+      node.textContent = originalText;
+    });
   }, 200);
 }
 
